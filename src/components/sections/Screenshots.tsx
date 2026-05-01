@@ -1,9 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { fadeInUp, staggerContainer, fadeInScale } from "@/lib/animations";
 
 const screens = [
   {
@@ -105,7 +102,7 @@ function ScreenContent({
               <div className="h-1.5 bg-foreground/15 rounded-full w-16 mb-3" />
               <div className="flex items-end gap-1 h-10">
                 {[35, 55, 40, 70, 50, 85, 65].map((h, j) => (
-                  <div key={j} className="flex-1 rounded-full transition-all"
+                  <div key={j} className="flex-1 rounded-full"
                     style={{ height: `${h}%`, backgroundColor: j === 5 ? accentColor : "hsl(var(--muted-foreground)/0.2)" }}
                   />
                 ))}
@@ -201,85 +198,51 @@ function ScreenContent({
   );
 }
 
-function ScreenMockup({
-  screen,
-  index,
-  isInView,
-}: {
-  screen: (typeof screens)[0];
-  index: number;
-  isInView: boolean;
-}) {
+function ScreenMockup({ screen, index }: { screen: (typeof screens)[0]; index: number }) {
   const t = useTranslations("screenshots.screens");
 
   return (
-    <motion.div
-      variants={fadeInScale}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      transition={{ delay: index * 0.08 }}
+    <div
       className="flex flex-col items-center gap-4 flex-shrink-0 w-[220px] md:w-[240px]"
+      style={{ animationDelay: `${index * 80}ms` }}
     >
-      {/* Phone */}
       <div className="relative w-full aspect-[9/18]">
         <div className="absolute inset-0 rounded-[36px] border border-border/60 bg-gradient-to-br from-muted to-card shadow-lg" />
         <div className={`absolute inset-[2px] rounded-[35px] overflow-hidden bg-gradient-to-br ${screen.gradient} ${screen.darkGradient}`}>
-          {/* Dynamic island */}
           <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-foreground/80 rounded-full z-10" />
           <ScreenContent items={screen.items} accentColor={screen.accentColor} />
         </div>
       </div>
-
-      {/* Label */}
       <p className="text-sm font-medium text-muted-foreground">
         {t(screen.key as "dashboard" | "cycle" | "chat" | "insights")}
       </p>
-    </motion.div>
+    </div>
   );
 }
 
 export function Screenshots() {
   const t = useTranslations("screenshots");
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section className="section-padding overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
-        {/* Header */}
-        <motion.div
-          ref={ref}
-          variants={staggerContainer}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="mb-16 md:mb-20 text-center"
-        >
-          <motion.p
-            variants={fadeInUp}
-            className="text-xs font-semibold uppercase tracking-widest text-accent mb-4"
-          >
+        <div className="mb-16 md:mb-20 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">
             {t("eyebrow")}
-          </motion.p>
-          <motion.h2
-            variants={fadeInUp}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tightest text-foreground mb-5"
-          >
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tightest text-foreground mb-5">
             {t("heading")}
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="text-base md:text-lg text-muted-foreground max-w-lg mx-auto leading-relaxed"
-          >
+          </h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-lg mx-auto leading-relaxed">
             {t("subheading")}
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        {/* Screens — horizontal scroll on mobile, centered on desktop */}
         <div className="-mx-5 md:-mx-8 lg:mx-0">
           <div className="flex gap-5 md:gap-6 px-5 md:px-8 lg:px-0 overflow-x-auto lg:overflow-visible lg:justify-center pb-4 lg:pb-0 snap-x snap-mandatory scrollbar-none">
             {screens.map((screen, i) => (
               <div key={screen.key} className="snap-center">
-                <ScreenMockup screen={screen} index={i} isInView={isInView} />
+                <ScreenMockup screen={screen} index={i} />
               </div>
             ))}
           </div>

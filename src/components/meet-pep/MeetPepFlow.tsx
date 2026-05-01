@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -94,9 +93,7 @@ const FLOW: FlowStep[] = [
     storeKey: "name",
   },
   {
-    openers: () => [
-      "kaç yaşındasın?.",
-    ],
+    openers: () => ["kaç yaşındasın?."],
     input: { type: "text", placeholder: "Yaşın..." },
     respond: (_, a) => [
       `Oooo aynı yaşlarda sayılırız çok iyi anlaşacağımıza neredeyse eminim artık, ${a.name} <3<3<3.`,
@@ -208,32 +205,22 @@ function TypingDots() {
 
 function PepMessage({ text }: { text: string }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="flex items-end gap-2.5"
-    >
+    <div className="flex items-end gap-2.5 animate-fade-up">
       <PepOrb size="sm" />
       <div className="max-w-[82%] bg-card border border-border/60 rounded-2xl rounded-bl-sm px-4 py-3 text-sm leading-relaxed text-foreground shadow-sm">
         {text}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 function UserMessage({ text }: { text: string }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className="flex justify-end"
-    >
+    <div className="flex justify-end animate-fade-up">
       <div className="max-w-[78%] bg-foreground text-background rounded-2xl rounded-br-sm px-4 py-3 text-sm leading-relaxed shadow-sm">
         {text}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -262,13 +249,7 @@ function TextInput({
   }, [value, onSubmit]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 8 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      className="flex items-center gap-2 bg-muted/50 border border-border/60 rounded-full px-4 py-2.5 shadow-sm"
-    >
+    <div className="flex items-center gap-2 bg-muted/50 border border-border/60 rounded-full px-4 py-2.5 shadow-sm">
       <input
         ref={inputRef}
         value={value}
@@ -290,7 +271,7 @@ function TextInput({
       >
         <Send className="h-3.5 w-3.5" />
       </button>
-    </motion.div>
+    </div>
   );
 }
 
@@ -302,19 +283,10 @@ function OptionsInput({
   onSelect: (value: string) => void;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 8 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-wrap gap-2"
-    >
-      {options.map((opt, i) => (
-        <motion.button
+    <div className="flex flex-wrap gap-2">
+      {options.map((opt) => (
+        <button
           key={opt}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: i * 0.06, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={() => onSelect(opt)}
           className={cn(
             "px-4 py-2.5 rounded-full border text-sm font-medium transition-all duration-200",
@@ -325,20 +297,15 @@ function OptionsInput({
           )}
         >
           {opt}
-        </motion.button>
+        </button>
       ))}
-    </motion.div>
+    </div>
   );
 }
 
 function FinalButton() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-      className="flex justify-center"
-    >
+    <div className="flex justify-center">
       <a
         href="#"
         className={cn(
@@ -351,7 +318,7 @@ function FinalButton() {
         App Store&apos;da Devam Et
         <ArrowRight className="h-4 w-4" />
       </a>
-    </motion.div>
+    </div>
   );
 }
 
@@ -359,11 +326,9 @@ function ProgressBar({ step }: { step: number }) {
   const progress = Math.min((step / TOTAL_CONTENT_STEPS) * 100, 100);
   return (
     <div className="h-[2px] bg-border/40 rounded-full overflow-hidden">
-      <motion.div
-        className="h-full bg-accent/60 rounded-full"
-        initial={{ width: 0 }}
-        animate={{ width: `${progress}%` }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      <div
+        className="h-full bg-accent/60 rounded-full transition-[width] duration-500 ease-out"
+        style={{ width: `${progress}%` }}
       />
     </div>
   );
@@ -388,10 +353,8 @@ export function MeetPepFlow({ isOpen, onClose }: MeetPepFlowProps) {
   const [started, setStarted] = useState(false);
 
   const bottomRef = useRef<HTMLDivElement>(null);
-  // Sequence number — increment to invalidate any in-flight timer chain
   const seqRef = useRef(0);
 
-  // Scroll to bottom whenever messages or typing state changes
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
@@ -439,7 +402,6 @@ export function MeetPepFlow({ isOpen, onClose }: MeetPepFlowProps) {
     [showPepMessages]
   );
 
-  // Start or reset flow based on isOpen
   useEffect(() => {
     if (isOpen && !started) {
       setStarted(true);
@@ -453,7 +415,7 @@ export function MeetPepFlow({ isOpen, onClose }: MeetPepFlowProps) {
       runStep(0, emptyAnswers);
     }
     if (!isOpen) {
-      seqRef.current++; // cancel all pending timers
+      seqRef.current++;
       setStarted(false);
       setMessages([]);
       setIsTyping(false);
@@ -497,7 +459,6 @@ export function MeetPepFlow({ isOpen, onClose }: MeetPepFlowProps) {
     [stepIndex, answers, showPepMessages, runStep]
   );
 
-  // Escape key closes
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -506,140 +467,101 @@ export function MeetPepFlow({ isOpen, onClose }: MeetPepFlowProps) {
     return () => window.removeEventListener("keydown", handler);
   }, [isOpen, onClose]);
 
+  if (!isOpen) return null;
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            key="pep-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="fixed inset-0 z-[90] bg-background/70 backdrop-blur-2xl"
-            onClick={onClose}
-            aria-hidden
-          />
+    <>
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 z-[90] bg-background/70 backdrop-blur-2xl animate-fade-in"
+        onClick={onClose}
+        aria-hidden
+      />
 
-          {/* Ambient glow */}
-          <motion.div
-            key="pep-glow"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="fixed inset-0 z-[91] pointer-events-none overflow-hidden"
-          >
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/8 rounded-full blur-[100px] animate-glow-pulse" />
-          </motion.div>
+      {/* Ambient glow */}
+      <div className="fixed inset-0 z-[91] pointer-events-none overflow-hidden animate-fade-in">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/8 rounded-full blur-[100px] animate-glow-pulse" />
+      </div>
 
-          {/* Panel */}
-          <motion.div
-            key="pep-panel"
-            initial={{ opacity: 0, y: 40, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.97 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[92] flex items-center justify-center p-4 md:p-8 pointer-events-none"
-          >
-            <div
-              className={cn(
-                "w-full max-w-md h-full max-h-[720px] flex flex-col",
-                "bg-background/95 border border-border/60 rounded-3xl shadow-2xl",
-                "pointer-events-auto overflow-hidden"
-              )}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Header */}
-              <div className="flex-shrink-0 px-5 pt-5 pb-4 border-b border-border/40">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <PepOrb size="sm" />
-                    <div>
-                      <p className="text-sm font-semibold text-foreground leading-none mb-0.5">
-                        Pep
-                      </p>
-                      <p className="text-[11px] text-accent flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block animate-pulse" />
-                        Seninle burada
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={onClose}
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-150"
-                    aria-label="Kapat"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
+      {/* Panel */}
+      <div className="fixed inset-0 z-[92] flex items-center justify-center p-4 md:p-8 pointer-events-none animate-fade-up">
+        <div
+          className={cn(
+            "w-full max-w-md h-full max-h-[720px] flex flex-col",
+            "bg-background/95 border border-border/60 rounded-3xl shadow-2xl",
+            "pointer-events-auto overflow-hidden"
+          )}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header */}
+          <div className="flex-shrink-0 px-5 pt-5 pb-4 border-b border-border/40">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <PepOrb size="sm" />
+                <div>
+                  <p className="text-sm font-semibold text-foreground leading-none mb-0.5">
+                    Pep
+                  </p>
+                  <p className="text-[11px] text-accent flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block animate-pulse" />
+                    Seninle burada
+                  </p>
                 </div>
-                <ProgressBar step={Math.min(stepIndex, TOTAL_CONTENT_STEPS)} />
               </div>
-
-              {/* Messages */}
-              <div className="flex-1 overflow-y-auto px-5 py-5 space-y-4 scroll-smooth">
-                <AnimatePresence initial={false}>
-                  {messages.map((msg) =>
-                    msg.from === "pep" ? (
-                      <PepMessage key={msg.id} text={msg.text} />
-                    ) : (
-                      <UserMessage key={msg.id} text={msg.text} />
-                    )
-                  )}
-                </AnimatePresence>
-
-                {/* Typing indicator */}
-                <AnimatePresence>
-                  {isTyping && (
-                    <motion.div
-                      key="typing-indicator"
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 4 }}
-                      transition={{ duration: 0.25 }}
-                      className="flex items-end gap-2.5"
-                    >
-                      <PepOrb size="sm" />
-                      <div className="bg-card border border-border/60 rounded-2xl rounded-bl-sm px-3 py-2.5 shadow-sm">
-                        <TypingDots />
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                <div ref={bottomRef} />
-              </div>
-
-              {/* Input area */}
-              <div className="flex-shrink-0 px-5 pb-5 pt-3 border-t border-border/30">
-                <AnimatePresence mode="wait">
-                  {inputMode.type === "text" && (
-                    <TextInput
-                      key="text-input"
-                      placeholder={inputMode.placeholder}
-                      onSubmit={handleUserInput}
-                    />
-                  )}
-                  {inputMode.type === "options" && (
-                    <OptionsInput
-                      key="options-input"
-                      options={inputMode.options}
-                      onSelect={handleUserInput}
-                    />
-                  )}
-                  {inputMode.type === "final" && (
-                    <FinalButton key="final-button" />
-                  )}
-                  {inputMode.type === "none" && (
-                    <div key="none" className="h-10" />
-                  )}
-                </AnimatePresence>
-              </div>
+              <button
+                onClick={onClose}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-150"
+                aria-label="Kapat"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+            <ProgressBar step={Math.min(stepIndex, TOTAL_CONTENT_STEPS)} />
+          </div>
+
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto px-5 py-5 space-y-4 scroll-smooth">
+            {messages.map((msg) =>
+              msg.from === "pep" ? (
+                <PepMessage key={msg.id} text={msg.text} />
+              ) : (
+                <UserMessage key={msg.id} text={msg.text} />
+              )
+            )}
+
+            {isTyping && (
+              <div className="flex items-end gap-2.5">
+                <PepOrb size="sm" />
+                <div className="bg-card border border-border/60 rounded-2xl rounded-bl-sm px-3 py-2.5 shadow-sm">
+                  <TypingDots />
+                </div>
+              </div>
+            )}
+
+            <div ref={bottomRef} />
+          </div>
+
+          {/* Input area */}
+          <div className="flex-shrink-0 px-5 pb-5 pt-3 border-t border-border/30">
+            {inputMode.type === "text" && (
+              <TextInput
+                key="text-input"
+                placeholder={inputMode.placeholder}
+                onSubmit={handleUserInput}
+              />
+            )}
+            {inputMode.type === "options" && (
+              <OptionsInput
+                key="options-input"
+                options={inputMode.options}
+                onSelect={handleUserInput}
+              />
+            )}
+            {inputMode.type === "final" && <FinalButton />}
+            {inputMode.type === "none" && <div className="h-10" />}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

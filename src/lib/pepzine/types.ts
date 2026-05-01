@@ -15,16 +15,23 @@ export const CATEGORIES: PepzineCategory[] = [
   "ilişkiler",
 ];
 
+export interface PepzineFaq {
+  question: string;
+  answer: string;
+}
+
 export interface PepzineFrontmatter {
   title: string;
   description: string;
   date: string;
+  updatedDate?: string;
   category: PepzineCategory;
   tags: string[];
   author: string;
   coverImage?: string;
   featured?: boolean;
   readingTime?: number;
+  faqs?: PepzineFaq[];
 }
 
 export interface PepzinePost {

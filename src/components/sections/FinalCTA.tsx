@@ -1,10 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 function AppStoreBadge({ store }: { store: "apple" | "google" }) {
   return (
@@ -41,12 +38,9 @@ function AppStoreBadge({ store }: { store: "apple" | "google" }) {
 
 export function FinalCTA() {
   const t = useTranslations("finalCta");
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section className="section-padding relative overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/30" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-accent/8 rounded-full blur-[100px]" />
@@ -54,63 +48,25 @@ export function FinalCTA() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-5 md:px-8 lg:px-12 text-center">
-        <motion.div
-          ref={ref}
-          variants={staggerContainer}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="max-w-3xl mx-auto"
-        >
-          <motion.p
-            variants={fadeInUp}
-            className="text-xs font-semibold uppercase tracking-widest text-accent mb-6"
-          >
+        <div className="max-w-3xl mx-auto">
+          <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-6">
             {t("eyebrow")}
-          </motion.p>
-
-          <motion.h2
-            variants={fadeInUp}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tightest text-foreground mb-6 text-balance"
-          >
+          </p>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tightest text-foreground mb-6 text-balance">
             {t("heading")}
-          </motion.h2>
-
-          <motion.p
-            variants={fadeInUp}
-            className="text-base md:text-lg text-muted-foreground leading-relaxed mb-12 max-w-xl mx-auto"
-          >
+          </h2>
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-12 max-w-xl mx-auto">
             {t("subheading")}
-          </motion.p>
-
-          <motion.div
-            variants={fadeInUp}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
-          >
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <AppStoreBadge store="apple" />
             <AppStoreBadge store="google" />
-          </motion.div>
+          </div>
+          <p className="text-xs text-muted-foreground/60">{t("disclaimer")}</p>
+        </div>
 
-          <motion.p
-            variants={fadeInUp}
-            className="text-xs text-muted-foreground/60"
-          >
-            {t("disclaimer")}
-          </motion.p>
-        </motion.div>
-
-        {/* Decorative elements */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: 0.6, duration: 1 }}
-          className="absolute -left-20 top-1/2 -translate-y-1/2 w-40 h-40 bg-accent/8 rounded-full blur-3xl pointer-events-none"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: 0.8, duration: 1 }}
-          className="absolute -right-20 top-1/3 w-48 h-48 bg-accent/6 rounded-full blur-3xl pointer-events-none"
-        />
+        <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-40 h-40 bg-accent/8 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -right-20 top-1/3 w-48 h-48 bg-accent/6 rounded-full blur-3xl pointer-events-none" />
       </div>
     </section>
   );

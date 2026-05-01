@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useScrolled } from "@/hooks/useScrolled";
@@ -50,14 +49,8 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
   return (
@@ -71,12 +64,7 @@ export function Header() {
         )}
       >
         <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-1 group"
-            aria-label="Pepapp"
-          >
+          <Link href="/" className="flex items-center gap-1 group" aria-label="Pepapp">
             <Image
               src="/images/Pepapp-Logo.png"
               alt="Pepapp"
@@ -87,7 +75,6 @@ export function Header() {
             />
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
@@ -100,7 +87,6 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Desktop Right */}
           <div className="hidden md:flex items-center gap-3">
             <LanguageSwitcher locale="tr" />
             <ThemeToggle />
@@ -109,7 +95,6 @@ export function Header() {
             </Button>
           </div>
 
-          {/* Mobile Controls */}
           <div className="flex md:hidden items-center gap-2">
             <ThemeToggle />
             <Button
@@ -118,6 +103,7 @@ export function Header() {
               className="rounded-full"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuOpen ? t("closeMenu") : t("openMenu")}
+              aria-expanded={menuOpen}
             >
               {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
@@ -125,44 +111,36 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed inset-0 z-40 bg-background pt-16 flex flex-col"
-          >
-            <div className="flex-1 flex flex-col gap-1 px-5 py-8">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.key}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06, duration: 0.25 }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="block py-4 text-2xl font-medium text-foreground border-b border-border/40"
-                  >
-                    {t(link.key)}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="px-5 py-8 flex flex-col gap-3">
-              <LanguageSwitcher locale="tr" />
-              <Button size="xl" variant="default" className="w-full">
-                {t("cta")}
-              </Button>
-            </div>
-          </motion.div>
+      {/* Mobile Menu — CSS transition, no framer-motion */}
+      <div
+        className={cn(
+          "fixed inset-0 z-40 bg-background pt-16 flex flex-col",
+          "transition-opacity duration-200",
+          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
-      </AnimatePresence>
+        aria-hidden={!menuOpen}
+      >
+        <div className="flex-1 flex flex-col gap-1 px-5 py-8">
+          {navLinks.map((link) => (
+            <Link
+              key={link.key}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              className="block py-4 text-2xl font-medium text-foreground border-b border-border/40"
+              tabIndex={menuOpen ? 0 : -1}
+            >
+              {t(link.key)}
+            </Link>
+          ))}
+        </div>
+
+        <div className="px-5 py-8 flex flex-col gap-3">
+          <LanguageSwitcher locale="tr" />
+          <Button size="xl" variant="default" className="w-full">
+            {t("cta")}
+          </Button>
+        </div>
+      </div>
     </>
   );
 }
