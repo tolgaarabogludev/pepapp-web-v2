@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "features": "Özellikler",
+    "pepTalk": "PepTalk",
+    "faq": "SSS",
+    "pepzine": "Pepzine",
+    "about": "Hakkımızda",
+    "cta": "Başla",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat"
+  },
+  "hero": {
+    "eyebrow": "Senin ritmine uyum sağlar",
+    "headline": "Anlaşılmaya\nihtiyacın var.",
+    "subheading": "Yalnızca döngünü takip eden birine değil, seni anlayan ve tanıyan birine ihtiyacın olduğunu biliyorum. Bu yüzden buradayım. Tanışmamız gerek.",
+    "primaryCta": "Denemeye Başla",
+    "secondaryCta": "Nasıl çalıştığını gör",
+    "socialProof": "{count}+ kullanıcı tarafından seviliyor",
+    "ratingLabel": "kullanıcı puanı"
+  },
+  "stats": {
+    "heading": "Milyonların güvendiği uygulama",
+    "users": {
+      "value": "12M+",
+      "label": "Mutlu Kadın"
+    },
+    "years": {
+      "value": "9 yıl",
+      "label": "Kadınların yanında"
+    },
+    "insights": {
+      "value": "Her gün",
+      "label": "Daha kişisel öneriler"
+    }
+  },
+  "features": {
+    "eyebrow": "Özellikler",
+    "heading": "Döngünün ötesine bak",
+    "subheading": "Pepapp, sağlığın her boyutunu bütünsel olarak ele alır. Sadece bir takvim değil, gerçek bir yardımcı.",
+    "items": {
+      "cycle": {
+        "title": "Akıllı Döngü Takibi",
+        "description": "Döngünü tahmin eder, hatırlatır ve zamanla seni daha iyi tanır. Her ay daha doğru, daha kişisel."
+      },
+      "pepTalk": {
+        "title": "PepTalk AI",
+        "description": "Seni gerçekten dinleyen bir yardımcı. Sorularını yanıtlar, nasıl hissettiğini anlar, sana özel içgörüler sunar."
+      },
+      "symptoms": {
+        "title": "Belirti & Ruh Hali",
+        "description": "Ağrı, yorgunluk, ruh hali — hepsini kaydet. Zamanla hangi dönemde nasıl hissettiğini net göreceksin."
+      },
+      "insights": {
+        "title": "Kişisel Tahminler",
+        "description": "Verilerin seninki. Tahminler de. Döngüne özel içgörüler, genel değil, gerçekten sana ait."
+      },
+      "wellness": {
+        "title": "Enerji & Uyku",
+        "description": "Bütünsel bir sağlık takibi. Enerjin, uyku düzenin ve döngün arasındaki bağlantıyı keşfet."
+      },
+      "privacy": {
+        "title": "Gizlilik Önce",
+        "description": "Veriler şifreli, sende. Hiçbir zaman satılmaz, paylaşılmaz. Sağlık verilerin tamamen senin kontrolünde."
+      }
+    }
+  },
+  "pepTalk": {
+    "eyebrow": "PepTalk ile tanış",
+    "heading": "Sana gerçekten\ndinleyen bir yardımcı.",
+    "subheading": "Bir arama motoru değil. Bir semptom listesi değil. PepTalk, döngünü tanıyan, nasıl hissettiğini bilen ve tam ihtiyacın olduğu anda yanında olan bir yardımcı.",
+    "points": {
+      "personal": "Döngüne göre kişiselleşen yanıtlar",
+      "empathetic": "Yargılamayan, dinleyen bir ton",
+      "actionable": "Somut, uygulanabilir öneriler"
+    },
+    "cta": "PepTalk'ı Keşfet",
+    "chatExample": {
+      "userMessage": "Bugün çok yorgunum, neden böyle olduğunu anlayamıyorum.",
+      "aiMessage": "Döngünün 21. günündesin ve bu dönemde enerji düşüşü oldukça normal. Vücudun progesteron değişimlerine uyum sağlıyor. Hafif bir yürüyüş ve magnezyum açısından zengin besinler yardımcı olabilir."
+    }
+  },
+  "screenshots": {
+    "eyebrow": "Uygulama",
+    "heading": "Her an, her yerde",
+    "subheading": "Tasarımdan içeriğe, her detay seni rahat hissettirmek için düşünüldü.",
+    "screens": {
+      "dashboard": "Günlük özet",
+      "cycle": "Döngü görünümü",
+      "chat": "PepTalk",
+      "insights": "Kişisel içgörüler"
+    }
+  },
+  "faq": {
+    "eyebrow": "Sık sorulan sorular",
+    "heading": "Aklındakileri sor",
+    "items": {
+      "what": {
+        "question": "Pepapp nedir?",
+        "answer": "Pepapp, döngüyü takip etmenin ötesine geçen bir sağlık yardımcısıdır. Seni zamanla tanır, döngünü anlayarak ihtiyacın olan içgörüleri ve desteği tam zamanında sunar."
+      },
+      "ai": {
+        "question": "PepTalk AI nasıl çalışır?",
+        "answer": "PepTalk, döngü verilerinle birlikte çalışan bir AI yardımcısıdır. Sorularını yanıtlamakla kalmaz, nasıl hissettiğini anlar ve döngünün hangi evresinde olduğuna göre kişiselleştirilmiş önerilerde bulunur."
+      },
+      "privacy": {
+        "question": "Verilerim güvende mi?",
+        "answer": "Evet. Tüm sağlık verilerin şifrelenir ve tamamen senin kontrolündedir. Verilerini asla üçüncü taraflarla paylaşmıyoruz. Gizliliğin en temel hakkın olduğuna inanıyoruz."
+      },
+      "free": {
+        "question": "Pepapp ücretsiz mi?",
+        "answer": "Pepapp'ın temel özellikleri tamamen ücretsizdir. Premium özelliklere erişim için abonelik seçenekleri mevcuttur. Deneme sürümüyle premium özellikleri ücret ödemeden keşfedebilirsin."
+      },
+      "platforms": {
+        "question": "Hangi cihazlarda kullanabilirim?",
+        "answer": "Pepapp iOS ve Android cihazlarda kullanılabilir. Veriler tüm cihazlarında otomatik olarak senkronize olur."
+      },
+      "irregular": {
+        "question": "Düzensiz döngüm varsa Pepapp işe yarar mı?",
+        "answer": "Kesinlikle. Pepapp, düzensiz döngüler için de tasarlanmıştır. Zamanla verilerini analiz ederek döngü örüntünü öğrenir ve buna göre tahminlerini ve önerilerini kişiselleştirir."
+      }
+    }
+  },
+  "finalCta": {
+    "eyebrow": "Bugün başla",
+    "heading": "Döngünü anlamaya başla.",
+    "subheading": "700.000'den fazla kişinin güvendiği Pepapp ile döngünü sadece takip etme — onu gerçekten anla.",
+    "primaryCta": "App Store'dan İndir",
+    "secondaryCta": "Google Play'den İndir",
+    "disclaimer": "Ücretsiz indir. Premium özellikler için abonelik gereklidir."
+  },
+  "footer": {
+    "tagline": "Döngünü anla, kendini tanı.",
+    "product": {
+      "title": "Ürün",
+      "features": "Özellikler",
+      "pepTalk": "PepTalk AI",
+      "pricing": "Fiyatlandırma",
+      "changelog": "Güncellemeler"
+    },
+    "company": {
+      "title": "Şirket",
+      "about": "Hakkımızda",
+      "blog": "Blog",
+      "careers": "Kariyer",
+      "press": "Basın"
+    },
+    "legal": {
+      "title": "Yasal",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Koşulları",
+      "cookies": "Çerez Politikası"
+    },
+    "copyright": "© {year} Pepapp. Tüm hakları saklıdır."
+  }
+}

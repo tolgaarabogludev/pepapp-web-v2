@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Warm editorial light palette */
+    --background: 36 25% 97%;
+    --foreground: 240 12% 10%;
+
+    --card: 36 20% 99%;
+    --card-foreground: 240 12% 10%;
+
+    --muted: 36 15% 92%;
+    --muted-foreground: 240 5% 42%;
+
+    /* Warm mauve / dusty rose — sophisticated, not girly */
+    --accent: 342 28% 62%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 36 15% 87%;
+    --ring: 342 28% 62%;
+
+    --radius: 0.875rem;
+  }
+
+  .dark {
+    /* Deep editorial dark palette */
+    --background: 240 12% 5%;
+    --foreground: 36 15% 94%;
+
+    --card: 240 10% 7%;
+    --card-foreground: 36 15% 94%;
+
+    --muted: 240 8% 13%;
+    --muted-foreground: 240 5% 54%;
+
+    --accent: 342 28% 70%;
+    --accent-foreground: 240 12% 8%;
+
+    --border: 240 8% 17%;
+    --ring: 342 28% 70%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    background-color: hsl(var(--accent) / 0.2);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Premium gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--accent)) 100%
+    );
+  }
+
+  /* Soft glow effect */
+  .glow-accent {
+    box-shadow: 0 0 60px hsl(var(--accent) / 0.15),
+      0 0 120px hsl(var(--accent) / 0.08);
+  }
+
+  /* Section spacing */
+  .section-padding {
+    @apply py-24 md:py-32 lg:py-40;
+  }
+
+  .container-prose {
+    @apply max-w-3xl mx-auto;
+  }
+
+  /* Subtle surface */
+  .surface {
+    @apply bg-card border border-border/60;
+  }
+
+  /* Frosted glass effect */
+  .glass {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background-color: hsl(var(--background) / 0.8);
+  }
+}

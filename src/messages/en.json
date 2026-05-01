@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "features": "Features",
+    "pepTalk": "PepTalk",
+    "faq": "FAQ",
+    "pepzine": "Pepzine",
+    "about": "About",
+    "cta": "Get Started",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "eyebrow": "Adapts to your rhythm",
+    "headline": "Don't track\nyour cycle.\nUnderstand it.",
+    "subheading": "Pepapp doesn't just track your cycle. It gets to know you over time, senses your changes, and gives you what you need exactly when you need it.",
+    "primaryCta": "Start Free Trial",
+    "secondaryCta": "See how it works",
+    "socialProof": "Loved by {count}+ users",
+    "ratingLabel": "user rating"
+  },
+  "stats": {
+    "heading": "Trusted by millions",
+    "users": {
+      "value": "700K+",
+      "label": "Active users"
+    },
+    "years": {
+      "value": "9 years",
+      "label": "Supporting women"
+    },
+    "insights": {
+      "value": "Every day",
+      "label": "More personal insights"
+    }
+  },
+  "features": {
+    "eyebrow": "Features",
+    "heading": "Look beyond the cycle",
+    "subheading": "Pepapp takes a holistic approach to your health. Not just a calendar — a real companion.",
+    "items": {
+      "cycle": {
+        "title": "Smart Cycle Tracking",
+        "description": "Predicts your cycle, sends reminders, and gets to know you better over time. More accurate, more personal every month."
+      },
+      "pepTalk": {
+        "title": "PepTalk AI",
+        "description": "A companion that truly listens. Answers your questions, understands how you feel, and offers personalized insights."
+      },
+      "symptoms": {
+        "title": "Symptoms & Mood",
+        "description": "Track pain, fatigue, mood — all of it. Over time, you'll see clearly how you feel in each phase."
+      },
+      "insights": {
+        "title": "Personal Predictions",
+        "description": "Your data is yours. So are your predictions. Cycle-specific insights that are genuinely personal, not generic."
+      },
+      "wellness": {
+        "title": "Energy & Sleep",
+        "description": "Holistic health tracking. Discover the connection between your energy, sleep patterns, and cycle."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Data is encrypted, yours alone. Never sold, never shared. Your health data is entirely in your control."
+      }
+    }
+  },
+  "pepTalk": {
+    "eyebrow": "Meet PepTalk",
+    "heading": "A companion that\ntruly listens.",
+    "subheading": "Not a search engine. Not a symptom checker. PepTalk knows your cycle, understands how you feel, and is there exactly when you need it.",
+    "points": {
+      "personal": "Responses that personalize to your cycle",
+      "empathetic": "Non-judgmental, listening tone",
+      "actionable": "Concrete, actionable suggestions"
+    },
+    "cta": "Discover PepTalk",
+    "chatExample": {
+      "userMessage": "I'm so tired today and I can't figure out why.",
+      "aiMessage": "You're on day 21 of your cycle and energy dips are very normal at this stage. Your body is adjusting to progesterone shifts. A light walk and magnesium-rich foods may help."
+    }
+  },
+  "screenshots": {
+    "eyebrow": "App",
+    "heading": "Every moment, everywhere",
+    "subheading": "From design to content, every detail was considered to make you feel at ease.",
+    "screens": {
+      "dashboard": "Daily overview",
+      "cycle": "Cycle view",
+      "chat": "PepTalk",
+      "insights": "Personal insights"
+    }
+  },
+  "faq": {
+    "eyebrow": "Frequently asked questions",
+    "heading": "Ask what's on your mind",
+    "items": {
+      "what": {
+        "question": "What is Pepapp?",
+        "answer": "Pepapp is a health companion that goes beyond cycle tracking. It gets to know you over time, understanding your cycle to deliver the insights and support you need exactly when you need them."
+      },
+      "ai": {
+        "question": "How does PepTalk AI work?",
+        "answer": "PepTalk works in tandem with your cycle data. It doesn't just answer questions — it understands how you're feeling and offers personalized suggestions based on where you are in your cycle."
+      },
+      "privacy": {
+        "question": "Is my data safe?",
+        "answer": "Yes. All your health data is encrypted and fully in your control. We never share your data with third parties. We believe privacy is your most fundamental right."
+      },
+      "free": {
+        "question": "Is Pepapp free?",
+        "answer": "Pepapp's core features are completely free. Premium features are available via subscription. You can explore premium features with a free trial before committing."
+      },
+      "platforms": {
+        "question": "Which devices can I use it on?",
+        "answer": "Pepapp is available on iOS and Android. Your data syncs automatically across all your devices."
+      },
+      "irregular": {
+        "question": "Does Pepapp work if I have an irregular cycle?",
+        "answer": "Absolutely. Pepapp is designed for irregular cycles too. Over time, it analyzes your data to learn your pattern and personalizes its predictions and recommendations accordingly."
+      }
+    }
+  },
+  "finalCta": {
+    "eyebrow": "Start today",
+    "heading": "Start understanding your cycle.",
+    "subheading": "Join 700,000+ people who trust Pepapp to not just track their cycle — but truly understand it.",
+    "primaryCta": "Download on App Store",
+    "secondaryCta": "Get it on Google Play",
+    "disclaimer": "Free to download. Premium features require subscription."
+  },
+  "footer": {
+    "tagline": "Understand your cycle, know yourself.",
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pepTalk": "PepTalk AI",
+      "pricing": "Pricing",
+      "changelog": "Changelog"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "blog": "Blog",
+      "careers": "Careers",
+      "press": "Press"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy"
+    },
+    "copyright": "© {year} Pepapp. All rights reserved."
+  }
+}
