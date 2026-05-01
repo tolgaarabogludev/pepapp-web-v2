@@ -28,22 +28,27 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const slugs = getAllSlugs();
   const locales = ["tr", "en"];
-  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
+  return locales.flatMap((locale) =>
+    getAllSlugs(locale).map((slug) => ({ locale, slug }))
+  );
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const { locale, slug } = await params;
+  const post = getPostBySlug(locale, slug);
   if (!post) return {};
 
   const { frontmatter } = post;
   const ogImage = frontmatter.coverImage ?? OG_DEFAULT;
+  const pageUrl = `${SITE_URL}/${locale}/pepzine/${slug}`;
 
   return {
     title: frontmatter.title,
     description: frontmatter.description,
+    alternates: {
+      canonical: pageUrl,
+    },
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
@@ -64,11 +69,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function PepzinePostPage({ params }: PageProps) {
   const { locale, slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getPostBySlug(locale, slug);
   if (!post) notFound();
 
   const { frontmatter, content } = post;
-  const relatedPosts = getRelatedPosts(slug, frontmatter.category);
+  const relatedPosts = getRelatedPosts(locale, slug, frontmatter.category);
   const headings = parseHeadings(content);
   const author = getAuthor(frontmatter.author);
 

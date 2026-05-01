@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { getAllPosts } from "@/lib/pepzine/posts";
 import type { PepzineCategory } from "@/lib/pepzine/types";
 import { BlogHero } from "@/components/pepzine/BlogHero";
@@ -9,17 +10,20 @@ import { PostCard } from "@/components/pepzine/PostCard";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
-export const metadata: Metadata = {
-  title: "Pepzine",
-  description:
-    "Döngün, zihnin ve bedenin hakkında içtenlikle yazılmış yazılar. Pepapp'tan bilim destekli, duygusal zeka ile hazırlanmış içerikler.",
-  openGraph: {
-    title: "Pepzine | Pepapp",
-    description:
-      "Döngün, zihnin ve bedenin hakkında içtenlikle yazılmış yazılar.",
-    type: "website",
-  },
-};
+export async function generateMetadata({ params }: Pick<PageProps, "params">): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "pepzinePage" });
+
+  return {
+    title: t("meta.title"),
+    description: t("meta.description"),
+    openGraph: {
+      title: t("meta.title"),
+      description: t("meta.description"),
+      type: "website",
+    },
+  };
+}
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -29,9 +33,10 @@ interface PageProps {
 export default async function PepzinePage({ params, searchParams }: PageProps) {
   const { locale } = await params;
   const { kategori } = await searchParams;
+  const t = await getTranslations({ locale, namespace: "pepzinePage" });
 
   const activeCategory = kategori as PepzineCategory | undefined;
-  const posts = getAllPosts(activeCategory);
+  const posts = getAllPosts(locale, activeCategory);
   const featuredPost = !activeCategory ? posts.find((p) => p.frontmatter.featured) : undefined;
   const remainingPosts = featuredPost
     ? posts.filter((p) => p.slug !== featuredPost.slug)
@@ -42,9 +47,9 @@ export default async function PepzinePage({ params, searchParams }: PageProps) {
       <Header />
       <main>
         <BlogHero
-          eyebrow="Pepzine"
-          heading="Kendini anla."
-          subheading="Döngün, zihnin ve bedenin için bilim destekli, içten yazılar."
+          eyebrow={t("hero.eyebrow")}
+          heading={t("hero.title")}
+          subheading={t("hero.description")}
         />
 
         <div className="pb-10">
@@ -68,7 +73,7 @@ export default async function PepzinePage({ params, searchParams }: PageProps) {
             </div>
           ) : (
             <p className="text-center text-muted-foreground py-20">
-              Bu kategoride henüz yazı yok.
+              {t("empty.title")}
             </p>
           )}
         </div>

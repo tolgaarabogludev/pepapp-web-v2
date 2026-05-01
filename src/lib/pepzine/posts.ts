@@ -5,6 +5,17 @@ import type { PepzinePost, PepzinePostMeta, PepzineCategory } from "./types";
 export type { PepzineCategory } from "./types";
 
 const CONTENT_DIR = path.join(process.cwd(), "src/content/pepzine");
+const SUPPORTED_LOCALES = ["tr", "en"] as const;
+type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
+
+function isSupportedLocale(locale: string): locale is SupportedLocale {
+  return SUPPORTED_LOCALES.includes(locale as SupportedLocale);
+}
+
+function getLocaleContentDir(locale: string): string {
+  const safeLocale = isSupportedLocale(locale) ? locale : "tr";
+  return path.join(CONTENT_DIR, safeLocale);
+}
 
 function estimateReadingTime(content: string): number {
   const wordsPerMinute = 200;
@@ -12,17 +23,22 @@ function estimateReadingTime(content: string): number {
   return Math.max(1, Math.round(wordCount / wordsPerMinute));
 }
 
-function getPostFiles(): string[] {
-  if (!fs.existsSync(CONTENT_DIR)) return [];
-  return fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".mdx"));
+function getPostFiles(locale: string): string[] {
+  const localeDir = getLocaleContentDir(locale);
+  if (!fs.existsSync(localeDir)) return [];
+  return fs.readdirSync(localeDir).filter((f) => f.endsWith(".mdx"));
 }
 
-export function getAllPosts(category?: PepzineCategory): PepzinePostMeta[] {
-  const files = getPostFiles();
+export function getAllPosts(
+  locale: string,
+  category?: PepzineCategory
+): PepzinePostMeta[] {
+  const localeDir = getLocaleContentDir(locale);
+  const files = getPostFiles(locale);
 
   const posts = files.map((file) => {
     const slug = file.replace(/\.mdx$/, "");
-    const raw = fs.readFileSync(path.join(CONTENT_DIR, file), "utf-8");
+    const raw = fs.readFileSync(path.join(localeDir, file), "utf-8");
     const { data, content } = matter(raw);
     const frontmatter = {
       ...(data as Omit<PepzinePostMeta["frontmatter"], "readingTime">),
@@ -42,8 +58,9 @@ export function getAllPosts(category?: PepzineCategory): PepzinePostMeta[] {
   );
 }
 
-export function getPostBySlug(slug: string): PepzinePost | null {
-  const filePath = path.join(CONTENT_DIR, `${slug}.mdx`);
+export function getPostBySlug(locale: string, slug: string): PepzinePost | null {
+  const localeDir = getLocaleContentDir(locale);
+  const filePath = path.join(localeDir, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
   const raw = fs.readFileSync(filePath, "utf-8");
@@ -56,16 +73,16 @@ export function getPostBySlug(slug: string): PepzinePost | null {
 }
 
 export function getRelatedPosts(
+  locale: string,
   currentSlug: string,
   category: PepzineCategory,
   limit = 3
 ): PepzinePostMeta[] {
-  return getAllPosts(category)
+  return getAllPosts(locale, category)
     .filter((p) => p.slug !== currentSlug)
     .slice(0, limit);
 }
 
-export function getAllSlugs(): string[] {
-  return getPostFiles().map((f) => f.replace(/\.mdx$/, ""));
+export function getAllSlugs(locale: string): string[] {
+  return getPostFiles(locale).map((f) => f.replace(/\.mdx$/, ""));
 }
-

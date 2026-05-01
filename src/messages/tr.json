@@ -1,14 +1,15 @@
 {
   "nav": {
-    "features": "Özellikler",
-    "pepTalk": "PepTalk",
-    "faq": "SSS",
-    "pepzine": "Pepzine",
-    "about": "Hakkımızda",
-    "cta": "Başla",
-    "openMenu": "Menüyü aç",
-    "closeMenu": "Menüyü kapat"
-  },
+  "features": "Özellikler",
+  "pepTalk": "PepTalk",
+  "premium": "Premium",
+  "faq": "SSS",
+  "pepzine": "Pepzine",
+  "about": "Hakkımızda",
+  "cta": "HEMEN PEPAPP'I DENE",
+  "openMenu": "Menüyü aç",
+  "closeMenu": "Menüyü kapat"
+},
   "hero": {
     "eyebrow": "Senin ritmine uyum sağlar",
     "headline": "Anlaşılmaya\nihtiyacın var.",
@@ -128,13 +129,187 @@
     "secondaryCta": "Google Play'den İndir",
     "disclaimer": "Ücretsiz indir. Premium özellikler için abonelik gereklidir."
   },
+  "pepzinePage": {
+    "meta": {
+      "title": "Pepzine | Pepapp",
+      "description": "Döngün, zihnin ve bedenin hakkında içtenlikle yazılmış yazılar. Pepapp'tan bilim destekli, duygusal zekâ ile hazırlanmış içerikler."
+    },
+    "hero": {
+      "eyebrow": "Pepzine",
+      "title": "Kendini anla.",
+      "description": "Döngün, zihnin ve bedenin için bilim destekli, içten yazılar."
+    },
+    "empty": {
+      "title": "Bu kategoride henüz yazı yok.",
+      "description": "Yakında burada daha fazla Pepzine yazısı olacak."
+    },
+    "categories": {
+      "all": "Tümü",
+      "döngü": "Döngü",
+      "zihin": "Zihin",
+      "beslenme": "Beslenme",
+      "hareket": "Hareket",
+      "uyku": "Uyku",
+      "ilişkiler": "İlişkiler"
+    }
+  },
+  "aboutPage": {
+    "meta": {
+      "title": "Hakkımızda | Pepapp",
+      "description": "Pepapp, kadın sağlığına daha kişisel bir yaklaşım sunar — duygusal zekâ, özen ve günlük iyi oluşa dair daha derin bir anlayışla tasarlandı."
+    },
+    "hero": {
+      "eyebrow": "Hakkımızda",
+      "title": "Kadın sağlığını anlamanın daha kişisel bir yolu.",
+      "description": "Pepapp bir araç gibi değil, seni gerçekten anlayan bir şey gibi hissettirsin diye tasarlandı."
+    },
+    "why": {
+      "eyebrow": "Neden varız",
+      "line1": "Kadın sağlığı uygulamalarının çoğu yalnızca takip etmek için tasarlanıyor. Faydalı, işlevsel ve kolayca unutulan araçlar gibi.",
+      "line2": "Pepapp farklı bir yerden doğdu. Sadece bedeninin ne yaptığını kaydetmene değil, bunun ne anlama geldiğini anlamana yardımcı olmak için.",
+      "line3": "Bedenini anlamanın daha insani, daha düşünceli ve daha kişisel hissettirmesi gerektiğine inanıyoruz."
+    },
+    "beliefs": {
+      "eyebrow": "Neye inanıyoruz",
+      "title": "Pepapp birkaç basit inanç üzerine kuruldu.",
+      "items": {
+        "body": {
+          "title": "Bedenin çözülmesi gereken bir problem değil.",
+          "body": "Değişir. Uyum sağlar. Konuşur. Bedeninin yargı değil, anlayış hak ettiğine inanıyoruz."
+        },
+        "cycle": {
+          "title": "Döngün bir takvimden fazlası.",
+          "body": "Enerjini, ruh halini, odağını ve ihtiyaçlarını şekillendirir. Onu anlamak, kendini anlama biçimini değiştirir."
+        },
+        "understanding": {
+          "title": "Veri, anlayışa dönüşmeli.",
+          "body": "Takip etmek, içgörüye dönüşmediği sürece eksiktir. Pepapp örüntüleri gerçekten hissedebileceğin ve kullanabileceğin bir şeye dönüştürür."
+        },
+        "wellbeing": {
+          "title": "İyi bakım sakin hissettirmeli.",
+          "body": "Sağlık desteği klinik, yorucu ya da soğuk hissettirmemeli. Yumuşak, faydalı ve sana yakın hissettirmeli."
+        }
+      }
+    },
+    "feel": {
+      "eyebrow": "Pepapp nasıl hissettirir",
+      "line1": "Sadece bir takip aracı değil.",
+      "line2": "Sadece bir sağlık uygulaması değil.",
+      "line3": "Bedeninle daha yumuşak bir ilişki.",
+      "line4": "Kendini anlamanın daha sakin bir yolu."
+    },
+    "behind": {
+      "eyebrow": "Pepapp’ın arkasında",
+      "title": "Gerçekten önemseyen küçük bir ekip tarafından geliştirildi.",
+      "description": "Pepapp; kadın sağlığının daha iyi ürünleri, daha iyi bir dili ve daha iyi bir özeni hak ettiğine inanan tasarımcılar, düşünenler ve üreticiler tarafından şekillendiriliyor.",
+      "pillars": {
+        "small": "Bağımsız ve küçük bir ekip",
+        "care": "Duygusal zekâ ile tasarlandı",
+        "product": "Uzun vadeli ürün özeniyle geliştirildi"
+      }
+    },
+    "future": {
+      "eyebrow": "Nereye gidiyoruz",
+      "title": "Takibin ötesinde, daha kişisel bir şey inşa ediyoruz.",
+      "description": "Pepapp, kadınların günlük iyi oluşu için zamanla seni tanıyan, örüntülerini anlayan ve gittikçe daha kişisel hissettiren daha akıllı, daha düşünceli bir yardımcıya dönüşüyor."
+    },
+    "finalCta": {
+      "title": "Pepapp’ı daha yakından anlamak istersen, başlamak için en iyi yer yine sensin.",
+      "primaryCta": "Pepapp’ı İndir",
+      "secondaryCta": "Pepzine’ı Oku"
+    }
+  },
+  "premiumPage": {
+    "meta": {
+      "title": "Pepapp Premium | Pepapp",
+      "description": "Pepapp Premium, Pepapp deneyimini daha kişisel, daha sakin ve daha sana ait hale getirir."
+    },
+    "hero": {
+      "eyebrow": "Pepapp Premium",
+      "title": "Pepapp, biraz daha sana ait olsun.",
+      "description": "Premium ile daha kişisel içgörüler, daha derin analizler ve daha sakin bir Pepapp deneyimi açılır. Bu daha fazla özellikten çok, Pepapp’ın seni daha iyi tanıması gibi hissettirir.",
+      "primaryCta": "Şimdi Premium’u Dene",
+      "secondaryCta": "Pepapp’ı Tanı"
+    },
+    "benefits": {
+      "eyebrow": "Premium ile Ne Değişir?",
+      "title": "Daha kişisel, daha sakin, daha derin.",
+      "items": {
+        "personal": {
+          "title": "Daha kişisel öneriler",
+          "body": "Döngünü, ruh halini ve günlük ihtiyaçlarını daha yakından anlayan önerilerle Pepapp sana daha uygun hissettirir."
+        },
+        "insights": {
+          "title": "Daha derin analizler",
+          "body": "Sadece ne olduğunu değil, neden böyle hissedebileceğini de daha net görmene yardımcı olur."
+        },
+        "calm": {
+          "title": "Daha sakin bir deneyim",
+          "body": "Reklamsız, daha odaklı ve daha yumuşak bir Pepapp alanı açılır."
+        }
+      }
+    },
+    "feel": {
+      "eyebrow": "Premium Nasıl Hissettirir?",
+      "line1": "Premium daha fazla özellik değil.",
+      "line2": "Daha kişisel bir Pepapp hissi.",
+      "line3": "Daha az gürültü, daha çok sen."
+    },
+    "intelligence": {
+      "eyebrow": "Pepapp Premium Intelligence",
+      "title": "Pepapp sadece göstermez. Seninle konuşur.",
+      "description": "Premium Intelligence, Pepapp’ın üzerine eklenen daha akıllı ve konuşkan bir katman gibi çalışır. Döngünü, ruh halini ve günlük ihtiyaçlarını birlikte anlamaya devam edebiliriz.",
+      "pepapp": "Bugün enerjin biraz değişmiş olabilir. İstersen bunu birlikte anlayalım.",
+      "user": "Neden böyle hissediyorum?"
+    },
+    "comparison": {
+      "eyebrow": "Karşılaştırma",
+      "title": "Ücretsiz başla. İstersen daha derine geç.",
+      "feature": "Özellik",
+      "free": "Ücretsiz",
+      "premium": "Premium",
+      "items": {
+        "cycle": "Döngünü takip etme",
+        "content": "Günlük içerikler ve hatırlatmalar",
+        "premiumContent": "Premium içerikler",
+        "insights": "Daha kişisel içgörüler",
+        "adFree": "Reklamsız deneyim"
+      }
+    },
+    "finalCta": {
+      "eyebrow": "Hazırsan",
+      "title": "Pepapp’ı biraz daha yakından tanımak istersen, Premium en iyi başlangıç.",
+      "description": "Daha kişisel, daha sakin ve daha sana ait bir Pepapp deneyimini aç.",
+      "primaryCta": "Şimdi Premium’u Dene",
+      "secondaryCta": "Pepzine’ı Oku"
+    }
+  },
+  "articleAppCta": {
+    "title": "Ben burada da yanındayım.",
+    "description": "Bu yazı sadece başlangıç. Pepapp'ta döngünü, ruh halini ve günlük ihtiyaçlarını birlikte anlamaya devam edebiliriz.",
+    "download": "Pepapp'ı İndir",
+    "discover": "PepTalk'ı Keşfet"
+  },
+  "articleFaq": {
+    "title": "Sık Sorulan Sorular"
+  },
+  "articleHeader": {
+    "updated": "Güncellendi"
+  },
+  "relatedPosts": {
+    "title": "İlgili Yazılar"
+  },
+  "tableOfContents": {
+    "ariaLabel": "İçindekiler",
+    "title": "Bu yazıda"
+  },
   "footer": {
     "tagline": "Döngünü anla, kendini tanı.",
     "product": {
       "title": "Ürün",
       "features": "Özellikler",
       "pepTalk": "PepTalk AI",
-      "pricing": "Fiyatlandırma",
+      "pricing": "Premium",
       "changelog": "Güncellemeler"
     },
     "company": {

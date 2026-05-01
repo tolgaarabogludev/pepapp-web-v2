@@ -2,6 +2,7 @@
   "nav": {
     "features": "Features",
     "pepTalk": "PepTalk",
+    "premium": "Premium",
     "faq": "FAQ",
     "pepzine": "Pepzine",
     "about": "About",
@@ -128,13 +129,187 @@
     "secondaryCta": "Get it on Google Play",
     "disclaimer": "Free to download. Premium features require subscription."
   },
+  "pepzinePage": {
+    "meta": {
+      "title": "Pepzine | Pepapp",
+      "description": "Thoughtful writing about your cycle, mind, and body. Science-backed content from Pepapp, written with emotional intelligence."
+    },
+    "hero": {
+      "eyebrow": "Pepzine",
+      "title": "Understand yourself.",
+      "description": "Science-backed, thoughtful writing for your cycle, mind, and body."
+    },
+    "empty": {
+      "title": "There are no articles in this category yet.",
+      "description": "More Pepzine stories will be here soon."
+    },
+    "categories": {
+      "all": "All",
+      "döngü": "Cycle",
+      "zihin": "Mind",
+      "beslenme": "Nutrition",
+      "hareket": "Movement",
+      "uyku": "Sleep",
+      "ilişkiler": "Relationships"
+    }
+  },
+  "aboutPage": {
+    "meta": {
+      "title": "About Pepapp | Pepapp",
+      "description": "Pepapp is a more personal approach to women’s health — built with emotional intelligence, care, and a deeper understanding of everyday wellbeing."
+    },
+    "hero": {
+      "eyebrow": "About Pepapp",
+      "title": "A more personal way to understand women’s health.",
+      "description": "Pepapp was built to feel less like a tool, and more like something that understands you."
+    },
+    "why": {
+      "eyebrow": "Why we exist",
+      "line1": "Most women’s health apps are built like trackers. Useful, functional, and forgettable.",
+      "line2": "Pepapp was built differently. Not only to help you log what your body does, but to help you understand what it means.",
+      "line3": "We believe understanding your body should feel more human, more thoughtful, and more personal."
+    },
+    "beliefs": {
+      "eyebrow": "What we believe",
+      "title": "Pepapp is built on a few simple beliefs.",
+      "items": {
+        "body": {
+          "title": "Your body is not a problem to solve.",
+          "body": "It changes. It adapts. It speaks. We believe your body deserves understanding, not judgment."
+        },
+        "cycle": {
+          "title": "Your cycle is more than a calendar.",
+          "body": "It shapes your energy, mood, focus, and needs. Understanding it changes how you understand yourself."
+        },
+        "understanding": {
+          "title": "Data should become understanding.",
+          "body": "Tracking means little unless it becomes insight. Pepapp turns patterns into something you can actually feel and use."
+        },
+        "wellbeing": {
+          "title": "Care should feel calm.",
+          "body": "Health support should not feel clinical, overwhelming, or cold. It should feel gentle, useful, and close to you."
+        }
+      }
+    },
+    "feel": {
+      "eyebrow": "What Pepapp feels like",
+      "line1": "Not just a tracker.",
+      "line2": "Not just a health app.",
+      "line3": "A softer relationship with your body.",
+      "line4": "A calmer way to understand yourself."
+    },
+    "behind": {
+      "eyebrow": "Behind Pepapp",
+      "title": "Built by a small team that cares deeply.",
+      "description": "Pepapp is shaped by designers, thinkers, and builders who believe women’s health deserves better products, better language, and better care.",
+      "pillars": {
+        "small": "A small independent team",
+        "care": "Designed with emotional intelligence",
+        "product": "Built with long-term product care"
+      }
+    },
+    "future": {
+      "eyebrow": "Where we’re going",
+      "title": "We’re building something more personal than tracking.",
+      "description": "Pepapp is becoming a more intelligent, more thoughtful companion for women’s everyday wellbeing — one that grows with you, understands your patterns, and feels more personal over time."
+    },
+    "finalCta": {
+      "title": "If you’d like to understand Pepapp more closely, the best place to begin is with yourself.",
+      "primaryCta": "Download Pepapp",
+      "secondaryCta": "Read Pepzine"
+    }
+  },
+  "premiumPage": {
+    "meta": {
+      "title": "Pepapp Premium | Pepapp",
+      "description": "Pepapp Premium makes Pepapp feel more personal, calmer, and more like yours."
+    },
+    "hero": {
+      "eyebrow": "Pepapp Premium",
+      "title": "Let Pepapp feel a little more like yours.",
+      "description": "Premium unlocks more personal insights, deeper analysis, and a calmer Pepapp experience. It feels less like more features, and more like Pepapp simply knows you better.",
+      "primaryCta": "Try Premium Now",
+      "secondaryCta": "Meet Pepapp"
+    },
+    "benefits": {
+      "eyebrow": "What changes with Premium?",
+      "title": "More personal, calmer, deeper.",
+      "items": {
+        "personal": {
+          "title": "More personal guidance",
+          "body": "Pepapp feels more in tune with you through suggestions that better understand your cycle, mood, and daily needs."
+        },
+        "insights": {
+          "title": "Deeper insights",
+          "body": "See not only what is happening, but better understand why you may be feeling this way."
+        },
+        "calm": {
+          "title": "A calmer experience",
+          "body": "A more focused, softer, ad-free Pepapp experience opens up."
+        }
+      }
+    },
+    "feel": {
+      "eyebrow": "What does Premium feel like?",
+      "line1": "Premium is not more features.",
+      "line2": "It’s a more personal Pepapp.",
+      "line3": "Less noise, more you."
+    },
+    "intelligence": {
+      "eyebrow": "Pepapp Premium Intelligence",
+      "title": "Pepapp doesn’t just show. It talks with you.",
+      "description": "Premium Intelligence works like a smarter, more conversational layer on top of Pepapp. We can keep understanding your cycle, mood, and daily needs together.",
+      "pepapp": "Your energy may feel a little different today. Want to understand it together?",
+      "user": "Why do I feel like this today?"
+    },
+    "comparison": {
+      "eyebrow": "Comparison",
+      "title": "Start free. Go deeper when you’re ready.",
+      "feature": "Feature",
+      "free": "Free",
+      "premium": "Premium",
+      "items": {
+        "cycle": "Cycle tracking",
+        "content": "Daily content & reminders",
+        "premiumContent": "Premium content",
+        "insights": "More personal insights",
+        "adFree": "Ad-free experience"
+      }
+    },
+    "finalCta": {
+      "eyebrow": "When you're ready",
+      "title": "If you’d like to know Pepapp a little more closely, Premium is the best place to begin.",
+      "description": "Unlock a Pepapp experience that feels more personal, calmer, and more like yours.",
+      "primaryCta": "Try Premium Now",
+      "secondaryCta": "Read Pepzine"
+    }
+  },
+  "articleAppCta": {
+    "title": "I’m here with you there, too.",
+    "description": "This article is only the beginning. In Pepapp, we can keep understanding your cycle, mood, and daily needs together.",
+    "download": "Download Pepapp",
+    "discover": "Discover PepTalk"
+  },
+  "articleFaq": {
+    "title": "Frequently Asked Questions"
+  },
+  "articleHeader": {
+    "updated": "Updated"
+  },
+  "relatedPosts": {
+    "title": "Related Articles"
+  },
+  "tableOfContents": {
+    "ariaLabel": "Table of contents",
+    "title": "In this article"
+  },
   "footer": {
     "tagline": "Understand your cycle, know yourself.",
     "product": {
       "title": "Product",
       "features": "Features",
       "pepTalk": "PepTalk AI",
-      "pricing": "Pricing",
+      "pricing": "Premium",
       "changelog": "Changelog"
     },
     "company": {

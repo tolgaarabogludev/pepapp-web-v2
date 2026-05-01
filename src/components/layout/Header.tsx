@@ -3,18 +3,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useScrolled } from "@/hooks/useScrolled";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { key: "features", href: "#features" },
-  { key: "pepTalk", href: "#peptalk" },
-  { key: "pepzine", href: "/tr/pepzine" },
-  { key: "faq", href: "#faq" },
+  { key: "premium", href: "/premium" },
+  { key: "pepzine", href: "/pepzine" },
 ];
 
 function LanguageSwitcher({ locale }: { locale: string }) {
@@ -47,6 +44,7 @@ export function Header() {
   const t = useTranslations("nav");
   const scrolled = useScrolled(24);
   const [menuOpen, setMenuOpen] = useState(false);
+  const locale = useLocale();
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -64,7 +62,7 @@ export function Header() {
         )}
       >
         <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-1 group" aria-label="Pepapp">
+          <Link href={`/${locale}`} className="flex items-center gap-1 group" aria-label="Pepapp">
             <Image
               src="/images/Pepapp-Logo.png"
               alt="Pepapp"
@@ -79,7 +77,7 @@ export function Header() {
             {navLinks.map((link) => (
               <Link
                 key={link.key}
-                href={link.href}
+                href={`/${locale}${link.href}`}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-150"
               >
                 {t(link.key)}
@@ -88,15 +86,12 @@ export function Header() {
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
-            <LanguageSwitcher locale="tr" />
-            <ThemeToggle />
             <Button size="md" variant="default" className="text-sm font-medium">
               {t("cta")}
             </Button>
           </div>
 
           <div className="flex md:hidden items-center gap-2">
-            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
@@ -124,7 +119,7 @@ export function Header() {
           {navLinks.map((link) => (
             <Link
               key={link.key}
-              href={link.href}
+              href={`/${locale}${link.href}`}
               onClick={() => setMenuOpen(false)}
               className="block py-4 text-2xl font-medium text-foreground border-b border-border/40"
               tabIndex={menuOpen ? 0 : -1}
@@ -135,7 +130,6 @@ export function Header() {
         </div>
 
         <div className="px-5 py-8 flex flex-col gap-3">
-          <LanguageSwitcher locale="tr" />
           <Button size="xl" variant="default" className="w-full">
             {t("cta")}
           </Button>

@@ -1,17 +1,9 @@
 "use client";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { CATEGORIES, type PepzineCategory } from "@/lib/pepzine/types";
-
-const LABELS: Record<PepzineCategory, string> = {
-  döngü: "Döngü",
-  zihin: "Zihin",
-  beslenme: "Beslenme",
-  hareket: "Hareket",
-  uyku: "Uyku",
-  ilişkiler: "İlişkiler",
-};
 
 interface CategoryChipsProps {
   active?: PepzineCategory | null;
@@ -21,6 +13,7 @@ export function CategoryChips({ active }: CategoryChipsProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const t = useTranslations("pepzinePage.categories");
 
   function handleSelect(cat: PepzineCategory | null) {
     const params = new URLSearchParams(searchParams.toString());
@@ -43,7 +36,7 @@ export function CategoryChips({ active }: CategoryChipsProps) {
             : "border-border text-muted-foreground hover:text-foreground hover:border-foreground"
         )}
       >
-        Tümü
+        {t("all")}
       </button>
       {CATEGORIES.map((cat) => (
         <button
@@ -56,7 +49,7 @@ export function CategoryChips({ active }: CategoryChipsProps) {
               : "border-border text-muted-foreground hover:text-foreground hover:border-foreground"
           )}
         >
-          {LABELS[cat]}
+          {t(cat)}
         </button>
       ))}
     </div>

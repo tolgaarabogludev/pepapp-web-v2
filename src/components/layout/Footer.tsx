@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function Footer() {
   const t = useTranslations("footer");
+  const locale = useLocale();
   const year = new Date().getFullYear();
 
   const columns = [
@@ -12,15 +14,15 @@ export function Footer() {
       links: [
         { label: t("product.features"), href: "#features" },
         { label: t("product.pepTalk"), href: "#peptalk" },
-        { label: t("product.pricing"), href: "#" },
-        { label: t("product.changelog"), href: "#" },
+        { label: t("product.pricing"), href: `/${locale}/premium` },
+        { label: t("product.changelog"), href: `/${locale}/updates` },
       ],
     },
     {
       title: t("company.title"),
       links: [
-        { label: t("company.about"), href: "#" },
-        { label: t("company.blog"), href: "#" },
+        { label: t("company.about"), href: `/${locale}/about` },
+        { label: t("company.blog"), href: `/${locale}/pepzine` },
         { label: t("company.careers"), href: "#" },
         { label: t("company.press"), href: "#" },
       ],
@@ -41,7 +43,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-1 group mb-4">
+            <Link href={`/${locale}`} className="flex items-center gap-1 group mb-4">
               <Image
                 src="/images/Pepapp-Logo.png"
                 alt="Pepapp"
@@ -82,13 +84,28 @@ export function Footer() {
           <p className="text-xs text-muted-foreground">
             {t("copyright", { year })}
           </p>
-          <div className="flex items-center gap-4">
-            <Link href="/tr" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-              Türkçe
-            </Link>
-            <Link href="/en" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-              English
-            </Link>
+          <div className="flex items-center gap-3">
+            <details className="relative group">
+              <summary className="flex cursor-pointer list-none items-center gap-2 rounded-full border border-border/70 px-3 py-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground [&::-webkit-details-marker]:hidden">
+                {locale === "tr" ? "Türkçe" : "English"}
+                <span className="text-[10px] text-muted-foreground transition-transform group-open:rotate-180">⌄</span>
+              </summary>
+              <div className="absolute bottom-full right-0 mb-2 min-w-36 overflow-hidden rounded-2xl border border-border/70 bg-background p-1 shadow-lg">
+                <Link
+                  href="/tr"
+                  className="block rounded-xl px-3 py-2 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  Türkçe
+                </Link>
+                <Link
+                  href="/en"
+                  className="block rounded-xl px-3 py-2 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  English
+                </Link>
+              </div>
+            </details>
+            <ThemeToggle />
           </div>
         </div>
       </div>

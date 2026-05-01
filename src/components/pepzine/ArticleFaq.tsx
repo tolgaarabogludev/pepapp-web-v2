@@ -1,4 +1,5 @@
 import type { PepzineFaq } from "@/lib/pepzine/types";
+import { useTranslations } from "next-intl";
 
 interface ArticleFaqProps {
   faqs: PepzineFaq[];
@@ -6,6 +7,7 @@ interface ArticleFaqProps {
 
 export function ArticleFaq({ faqs }: ArticleFaqProps) {
   if (!faqs || faqs.length === 0) return null;
+  const t = useTranslations("articleFaq");
 
   return (
     <section
@@ -16,7 +18,7 @@ export function ArticleFaq({ faqs }: ArticleFaqProps) {
         id="faq-heading"
         className="text-base font-semibold text-foreground mb-6"
       >
-        Sık Sorulan Sorular
+        {t("title")}
       </h2>
       <dl className="flex flex-col gap-6">
         {faqs.map((faq, i) => (

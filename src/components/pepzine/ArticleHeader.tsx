@@ -1,10 +1,20 @@
 import type { PepzineFrontmatter } from "@/lib/pepzine/types";
+import { useLocale, useTranslations } from "next-intl";
 
 interface ArticleHeaderProps {
   frontmatter: PepzineFrontmatter;
 }
 
 export function ArticleHeader({ frontmatter }: ArticleHeaderProps) {
+  const locale = useLocale();
+  const t = useTranslations("articleHeader");
+  const formattedDate = new Date(frontmatter.date).toLocaleDateString(locale === "tr" ? "tr-TR" : "en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const readingTimeLabel = locale === "tr" ? "dk okuma" : "min read";
+
   return (
     <header className="pt-6 pb-8 px-5 max-w-2xl mx-auto">
       <div className="flex items-center gap-3 mb-5">
@@ -13,7 +23,7 @@ export function ArticleHeader({ frontmatter }: ArticleHeaderProps) {
         </span>
         {frontmatter.readingTime && (
           <span className="text-xs text-muted-foreground">
-            · {frontmatter.readingTime} dk okuma
+            · {frontmatter.readingTime} {readingTimeLabel}
           </span>
         )}
       </div>
@@ -30,19 +40,15 @@ export function ArticleHeader({ frontmatter }: ArticleHeaderProps) {
         <span className="text-sm text-muted-foreground">{frontmatter.author}</span>
         <span className="text-muted-foreground/40" aria-hidden>·</span>
         <time dateTime={frontmatter.date} className="text-sm text-muted-foreground">
-          {new Date(frontmatter.date).toLocaleDateString("tr-TR", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+          {formattedDate}
         </time>
         {frontmatter.updatedDate && (
           <>
             <span className="text-muted-foreground/40" aria-hidden>·</span>
             <span className="text-xs text-muted-foreground/70">
-              Güncellendi:{" "}
+              {t("updated")}:{" "}
               <time dateTime={frontmatter.updatedDate}>
-                {new Date(frontmatter.updatedDate).toLocaleDateString("tr-TR", {
+                {new Date(frontmatter.updatedDate).toLocaleDateString(locale === "tr" ? "tr-TR" : "en-US", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
