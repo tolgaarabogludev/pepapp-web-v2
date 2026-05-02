@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { Container } from "@/components/layout/primitives/Container";
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -39,7 +40,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border/60 bg-background">
-      <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-16 md:py-20">
+      <Container className="py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -108,7 +109,7 @@ export function Footer() {
             <ThemeToggle />
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/layout/primitives/Container";
 import { useScrolled } from "@/hooks/useScrolled";
 import { cn } from "@/lib/utils";
 
@@ -61,7 +62,7 @@ export function Header() {
             : "bg-transparent"
         )}
       >
-        <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 h-16 flex items-center justify-between">
+        <Container className="h-16 flex items-center justify-between">
           <Link href={`/${locale}`} className="flex items-center gap-1 group" aria-label="Pepapp">
             <Image
               src="/images/Pepapp-Logo.png"
@@ -103,38 +104,31 @@ export function Header() {
               {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
           </div>
-        </div>
+        </Container>
       </header>
 
-      {/* Mobile Menu — CSS transition, no framer-motion */}
-      <div
-        className={cn(
-          "fixed inset-0 z-40 bg-background pt-16 flex flex-col",
-          "transition-opacity duration-200",
-          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        )}
-        aria-hidden={!menuOpen}
-      >
-        <div className="flex-1 flex flex-col gap-1 px-5 py-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.key}
-              href={`/${locale}${link.href}`}
-              onClick={() => setMenuOpen(false)}
-              className="block py-4 text-2xl font-medium text-foreground border-b border-border/40"
-              tabIndex={menuOpen ? 0 : -1}
-            >
-              {t(link.key)}
-            </Link>
-          ))}
-        </div>
+      {menuOpen && (
+        <div className="fixed inset-0 z-40 bg-background pt-16 flex flex-col md:hidden">
+          <div className="flex-1 flex flex-col gap-1 px-5 py-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.key}
+                href={`/${locale}${link.href}`}
+                onClick={() => setMenuOpen(false)}
+                className="block py-4 text-2xl font-medium text-foreground border-b border-border/40"
+              >
+                {t(link.key)}
+              </Link>
+            ))}
+          </div>
 
-        <div className="px-5 py-8 flex flex-col gap-3">
-          <Button size="xl" variant="default" className="w-full">
-            {t("cta")}
-          </Button>
+          <div className="px-5 py-8 flex flex-col gap-3">
+            <Button size="xl" variant="default" className="w-full">
+              {t("cta")}
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

@@ -303,6 +303,37 @@
     "ariaLabel": "İçindekiler",
     "title": "Bu yazıda"
   },
+  "updates": {
+    "eyebrow": "Güncellemeler",
+    "title": "Pepapp yenilikleri",
+    "description": "Pepapp’ın son sürümlerinde gelen önemli değişiklikleri, iyileştirmeleri ve yeni özellikleri burada takip edebilirsin.",
+    "version": "Sürüm",
+    "v200": {
+      "date": "Nisan 2026",
+      "items": [
+        "Pepapp Intelligence için yeni konuşma deneyimi hazırlandı.",
+        "Premium deneyimi daha kişisel ve anlaşılır hale getirildi.",
+        "Pepzine içerik sayfaları yenilendi ve daha sade bir okuma deneyimi sunuldu.",
+        "Mobil görünüm, performans ve erişilebilirlik tarafında genel iyileştirmeler yapıldı."
+      ]
+    },
+    "v190": {
+      "date": "Mart 2026",
+      "items": [
+        "Ana sayfa anlatımı daha duygusal ve rehberlik odaklı hale getirildi.",
+        "Döngü, ruh hali ve günlük öneriler için içerik yapısı geliştirildi.",
+        "Arayüzdeki küçük etkileşimler ve geçişler iyileştirildi."
+      ]
+    },
+    "v180": {
+      "date": "Şubat 2026",
+      "items": [
+        "Pepapp Premium için yeni sayfa yapısı hazırlandı.",
+        "Çoklu dil altyapısı genişletildi.",
+        "SEO ve paylaşım önizlemeleri için temel altyapı güçlendirildi."
+      ]
+    }
+  },
   "footer": {
     "tagline": "Döngünü anla, kendini tanı.",
     "product": {

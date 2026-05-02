@@ -43,11 +43,11 @@ export function FinalCTA() {
     <section className="section-padding relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/30" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-accent/8 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[220px] bg-accent/8 rounded-full blur-[72px] md:w-[800px] md:h-[400px] md:blur-[100px]" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-5 md:px-8 lg:px-12 text-center">
+      <div className="relative max-w-7xl mx-auto w-full max-w-full px-5 md:px-8 lg:px-12 text-center overflow-hidden">
         <div className="max-w-3xl mx-auto">
           <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-6">
             {t("eyebrow")}
@@ -65,8 +65,8 @@ export function FinalCTA() {
           <p className="text-xs text-muted-foreground/60">{t("disclaimer")}</p>
         </div>
 
-        <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-40 h-40 bg-accent/8 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -right-20 top-1/3 w-48 h-48 bg-accent/6 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-10 md:-left-20 top-1/2 -translate-y-1/2 w-28 h-28 md:w-40 md:h-40 bg-accent/8 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -right-10 md:-right-20 top-1/3 w-32 h-32 md:w-48 md:h-48 bg-accent/6 rounded-full blur-3xl pointer-events-none" />
       </div>
     </section>
   );
