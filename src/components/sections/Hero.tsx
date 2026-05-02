@@ -18,14 +18,15 @@ const MeetPepFlow = dynamic(
 function PepVisual() {
   return (
     <div className="relative flex items-center justify-center w-full h-full">
-      <div className="absolute w-72 h-72 rounded-full bg-accent/18 blur-3xl animate-glow-pulse" />
-      <div className="absolute w-96 h-96 rounded-full bg-accent/10 blur-[100px]" style={{ animationDelay: "1.5s" }} />
-      <div className="relative w-[320px] h-[320px] md:w-[420px] md:h-[420px] xl:w-[620px] xl:h-[620px]">
+      <div className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full bg-accent/18 blur-3xl animate-glow-pulse" />
+      <div className="absolute w-72 h-72 md:w-96 md:h-96 rounded-full bg-accent/10 blur-[72px] md:blur-[100px]" style={{ animationDelay: "1.5s" }} />
+      <div className="relative w-[260px] h-[260px] md:w-[420px] md:h-[420px] xl:w-[620px] xl:h-[620px]">
         <Image
           src="/images/pep-hero.png"
           alt="Pep"
           fill
           priority
+          sizes="(max-width: 768px) 260px, (max-width: 1280px) 420px, 620px"
           className="object-contain drop-shadow-[0_24px_64px_hsl(var(--foreground)/0.18)]"
         />
       </div>
@@ -40,10 +41,10 @@ export function Hero() {
   return (
     <>
       <MeetPepFlow isOpen={meetPepOpen} onClose={() => setMeetPepOpen(false)} />
-      <section className="relative min-h-screen flex flex-col overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
+      <section className="relative min-h-[100svh] md:min-h-screen flex flex-col overflow-hidden">
+        <div className="absolute inset-0 w-full max-w-[100vw] overflow-hidden pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-background" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent/6 blur-[120px] translate-x-1/3 -translate-y-1/4" />
+          <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-accent/6 blur-[72px] translate-x-1/4 -translate-y-1/4 md:w-[600px] md:h-[600px] md:blur-[120px] md:translate-x-1/3" />
           <div
             className="absolute inset-0 opacity-[0.015]"
             style={{
@@ -53,10 +54,10 @@ export function Hero() {
           />
         </div>
 
-        <div className="relative flex-1 flex flex-col max-w-7xl mx-auto w-full px-5 md:px-8 lg:px-12">
-          <div className="flex-1 flex flex-col lg:flex-row items-center pt-28 pb-12 gap-12 lg:gap-8 xl:gap-16">
+        <div className="relative flex-1 flex flex-col max-w-7xl mx-auto w-full max-w-full px-5 md:px-8 lg:px-12 overflow-hidden">
+          <div className="flex-1 flex flex-col lg:flex-row items-center pt-28 pb-12 gap-10 lg:gap-8 xl:gap-16 min-w-0">
             {/* Text column */}
-            <div className="flex-1 flex flex-col items-start lg:items-start animate-fade-up">
+            <div className="flex-1 min-w-0 flex flex-col items-start lg:items-start animate-fade-up">
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border/70 bg-card/60 text-xs font-medium text-muted-foreground tracking-wide mb-8">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse flex-shrink-0" />
                 {t("eyebrow")}
@@ -112,7 +113,7 @@ export function Hero() {
             </div>
 
             {/* Visual column */}
-            <div className="relative w-full lg:w-auto flex-shrink-0 flex items-center justify-center h-[520px] lg:h-auto lg:flex-1 lg:max-w-[420px] animate-fade-in">
+            <div className="relative w-full max-w-full lg:w-auto flex-shrink-0 flex items-center justify-center h-[360px] md:h-[520px] lg:h-auto lg:flex-1 lg:max-w-[420px] animate-fade-in">
               <PepVisual />
             </div>
           </div>
