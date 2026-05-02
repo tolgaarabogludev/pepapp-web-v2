@@ -121,3 +121,8 @@
     background-color: hsl(var(--background) / 0.8);
   }
 }
+
+html,
+body {
+  overflow-x: hidden;
+}

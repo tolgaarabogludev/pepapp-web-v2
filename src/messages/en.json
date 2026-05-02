@@ -303,6 +303,37 @@
     "ariaLabel": "Table of contents",
     "title": "In this article"
   },
+  "updates": {
+    "eyebrow": "Updates",
+    "title": "What’s new in Pepapp",
+    "description": "Follow the latest Pepapp releases, improvements, and meaningful product changes in one simple place.",
+    "version": "Version",
+    "v200": {
+      "date": "April 2026",
+      "items": [
+        "A new conversation experience was prepared for Pepapp Intelligence.",
+        "The Premium experience was made more personal and easier to understand.",
+        "Pepzine content pages were refreshed for a cleaner reading experience.",
+        "General improvements were made across mobile layout, performance, and accessibility."
+      ]
+    },
+    "v190": {
+      "date": "March 2026",
+      "items": [
+        "The homepage narrative was made more emotional and guidance-focused.",
+        "The content structure for cycle, mood, and daily suggestions was improved.",
+        "Small interface interactions and transitions were refined."
+      ]
+    },
+    "v180": {
+      "date": "February 2026",
+      "items": [
+        "A new page structure was prepared for Pepapp Premium.",
+        "The multilingual foundation was expanded.",
+        "The SEO and social sharing preview foundation was strengthened."
+      ]
+    }
+  },
   "footer": {
     "tagline": "Understand your cycle, know yourself.",
     "product": {
