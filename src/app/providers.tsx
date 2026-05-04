@@ -1,9 +1,6 @@
-
-
 "use client";
 
 import posthog from "posthog-js";
-import { PostHogProvider } from "posthog-js/react";
 import { useEffect } from "react";
 
 type ProvidersProps = {
@@ -12,11 +9,15 @@ type ProvidersProps = {
 
 export function Providers({ children }: ProvidersProps) {
   useEffect(() => {
-    if (!process.env.NEXT_PUBLIC_POSTHOG_KEY) {
+    const posthogKey =
+      process.env.NEXT_PUBLIC_POSTHOG_KEY ??
+      process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN;
+
+    if (!posthogKey || posthog.__loaded) {
       return;
     }
 
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    posthog.init(posthogKey, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com",
       person_profiles: "identified_only",
       capture_pageview: true,
@@ -26,5 +27,5 @@ export function Providers({ children }: ProvidersProps) {
     });
   }, []);
 
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
+  return <>{children}</>;
 }
