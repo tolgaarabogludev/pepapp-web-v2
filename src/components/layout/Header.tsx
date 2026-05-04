@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { analytics } from "@/lib/analytics";
 import Link from "next/link";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
@@ -47,6 +48,12 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const locale = useLocale();
 
+  const openMeetPep = (source: "desktop_header" | "mobile_header" | "mobile_menu") => {
+    analytics.headerCtaClicked(source);
+    analytics.meetPepOpened(source);
+    window.dispatchEvent(new CustomEvent("open-meet-pep"));
+  };
+
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -62,8 +69,8 @@ export function Header() {
             : "bg-transparent"
         )}
       >
-        <Container className="h-16 flex items-center justify-between">
-          <Link href={`/${locale}`} className="flex items-center gap-1 group" aria-label="Pepapp">
+        <Container className="relative h-16 flex items-center justify-between">
+          <Link href={`/${locale}`} className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center gap-1 group" aria-label="Pepapp">
             <Image
               src="/images/Pepapp-Logo.png"
               alt="Pepapp"
@@ -87,12 +94,12 @@ export function Header() {
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
-            <Button size="md" variant="default" className="text-sm font-medium">
+            <Button size="md" variant="default" className="text-sm font-medium" onClick={() => openMeetPep("desktop_header")}>
               {t("cta")}
             </Button>
           </div>
 
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center justify-between w-full">
             <Button
               variant="ghost"
               size="icon"
@@ -102,6 +109,10 @@ export function Header() {
               aria-expanded={menuOpen}
             >
               {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </Button>
+
+            <Button size="sm" variant="default" className="text-xs font-medium px-3" onClick={() => openMeetPep("mobile_header")}>
+              {t("cta")}
             </Button>
           </div>
         </Container>
@@ -123,7 +134,15 @@ export function Header() {
           </div>
 
           <div className="px-5 py-8 flex flex-col gap-3">
-            <Button size="xl" variant="default" className="w-full">
+            <Button
+              size="xl"
+              variant="default"
+              className="w-full"
+              onClick={() => {
+                setMenuOpen(false);
+                openMeetPep("mobile_menu");
+              }}
+            >
               {t("cta")}
             </Button>
           </div>

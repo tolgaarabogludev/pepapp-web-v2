@@ -12,12 +12,15 @@
   },
   "hero": {
     "eyebrow": "Adapts to your rhythm",
-    "headline": "Don't track\nyour cycle.\nUnderstand it.",
-    "subheading": "Pepapp doesn't just track your cycle. It gets to know you over time, senses your changes, and gives you what you need exactly when you need it.",
-    "primaryCta": "Start Free Trial",
+    "headline": "The app that stays with you through every phase",
+    "subheading": "Track your cycle, understand your body, and feel more in control with daily insights, private support, and a companion that gets you.",
+    "primaryCta": "Download Pepapp Now",
     "secondaryCta": "See how it works",
     "socialProof": "Loved by {count}+ users",
-    "ratingLabel": "user rating"
+    "ratingLabel": "5-star ratings on the App Store",
+    "ratingCount": "200K+",
+    "happyWomen": "5M+ Happy Women",
+    "awardText": "Awarded Best Period Tracking App 2025 in Turkey"
   },
   "stats": {
     "heading": "Trusted by millions",

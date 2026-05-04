@@ -1,17 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { useTranslations } from "next-intl";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { ChevronDown, ExternalLink, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Container } from "@/components/layout/primitives/Container";
 
-const MeetPepFlow = dynamic(
+const MeetPepRuntime = dynamic(
   () =>
-    import("@/components/meet-pep/MeetPepFlow").then((m) => ({
-      default: m.MeetPepFlow,
+    import("@/features/meet-pep/runtime/MeetPepRuntime").then((m) => ({
+      default: m.MeetPepRuntime,
     })),
   { ssr: false }
 );
@@ -37,11 +37,31 @@ function PepVisual() {
 
 export function Hero() {
   const t = useTranslations("hero");
+  const locale = useLocale() as "tr" | "en";
   const [meetPepOpen, setMeetPepOpen] = useState(false);
+  useEffect(() => {
+    const handleOpenMeetPep = () => setMeetPepOpen(true);
+
+    window.addEventListener("open-meet-pep", handleOpenMeetPep);
+    return () => window.removeEventListener("open-meet-pep", handleOpenMeetPep);
+  }, []);
 
   return (
     <>
-      <MeetPepFlow isOpen={meetPepOpen} onClose={() => setMeetPepOpen(false)} />
+      {meetPepOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 p-4 backdrop-blur-xl">
+          <div className="relative w-full max-w-xl">
+            <button
+              type="button"
+              onClick={() => setMeetPepOpen(false)}
+              className="absolute -top-12 right-0 rounded-full border border-border/60 bg-card px-4 py-2 text-sm font-medium text-muted-foreground shadow-sm transition-colors hover:text-foreground"
+            >
+              Kapat
+            </button>
+            <MeetPepRuntime locale={locale} />
+          </div>
+        </div>
+      )}
       <section className="relative min-h-[100svh] md:min-h-screen flex flex-col overflow-hidden">
         <div className="absolute inset-0 w-full max-w-[100vw] overflow-hidden pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-background" />
@@ -58,13 +78,19 @@ export function Hero() {
         <Container className="relative flex-1 flex flex-col overflow-hidden">
           <div className="flex-1 flex flex-col lg:flex-row items-center pt-24 sm:pt-28 pb-10 sm:pb-12 gap-10 lg:gap-8 xl:gap-16 min-w-0">
             {/* Text column */}
-            <div className="flex-1 min-w-0 flex flex-col items-start lg:items-start animate-fade-up">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border/70 bg-card/60 text-xs font-medium text-muted-foreground tracking-wide mb-8">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse flex-shrink-0" />
-                {t("eyebrow")}
-              </span>
+            <div className="flex-1 min-w-0 flex flex-col items-center text-center lg:items-start lg:text-left animate-fade-up">
+              <div className="inline-flex items-center justify-center gap-2.5 px-3.5 py-1.5 rounded-full border border-border/70 bg-card/70 text-xs font-medium text-muted-foreground tracking-wide mb-8 shadow-sm backdrop-blur-sm">
+                <span className="flex items-center gap-0.5 text-accent" aria-hidden="true">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                  ))}
+                </span>
+                <span>
+                  <span className="font-semibold text-foreground">{t("ratingCount")}</span> {t("ratingLabel")}
+                </span>
+              </div>
 
-              <h1 className="text-[clamp(2.5rem,11vw,5.5rem)] lg:text-[clamp(3.75rem,6vw,5.5rem)] font-bold leading-[1.04] tracking-tightest text-foreground text-balance mb-7">
+              <h1 className="text-[clamp(2.5rem,11vw,5.5rem)] lg:text-[clamp(3.75rem,6vw,5.5rem)] font-bold leading-[1.04] tracking-tightest text-foreground text-balance mb-7 text-center lg:text-left">
                 {t("headline")
                   .split("\n")
                   .map((line, i) => (
@@ -72,44 +98,36 @@ export function Hero() {
                   ))}
               </h1>
 
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-[460px] text-pretty mb-10">
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-[460px] text-pretty mb-10 text-center lg:text-left">
                 {t("subheading")}
               </p>
 
-              <div className="flex w-full flex-col sm:w-auto sm:flex-row items-stretch sm:items-center gap-3 mb-12">
+              <div className="flex w-full flex-col sm:w-auto sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 mb-12">
                 <Button
+                  asChild
                   size="xl"
                   variant="default"
                   className="group gap-2.5 w-full sm:w-auto"
-                  onClick={() => setMeetPepOpen(true)}
                 >
-                  Biraz Konuşalım
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-                </Button>
-                <Button size="xl" variant="ghost" className="w-full sm:w-auto text-muted-foreground hover:text-foreground">
-                  {t("secondaryCta")}
+                  <a href="#final-cta">
+                    {t("primaryCta")}
+                  </a>
                 </Button>
               </div>
 
-              <div className="flex items-center gap-3">
-                <div className="flex -space-x-2">
-                  {[
-                    "hsl(16,60%,65%)",
-                    "hsl(210,50%,65%)",
-                    "hsl(145,40%,60%)",
-                    "hsl(280,40%,65%)",
-                  ].map((color, i) => (
-                    <div
-                      key={i}
-                      className="w-8 h-8 rounded-full border-2 border-background ring-1 ring-border/30"
-                      style={{ backgroundColor: color }}
-                    />
-                  ))}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">700K+</span>{" "}
-                  {t("socialProof", { count: "" }).replace("{count}+", "").trim()}
-                </div>
+              <div className="flex flex-col items-center lg:items-start gap-1.5 text-center lg:text-left mb-2">
+                <p className="text-sm md:text-base font-semibold text-foreground">
+                  {t("happyWomen")}
+                </p>
+                <a
+                  href="https://ghpnews.digital/winners/pepapp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center lg:justify-start gap-1.5 text-xs md:text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                >
+                  {t("awardText")}
+                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
               </div>
             </div>
 
