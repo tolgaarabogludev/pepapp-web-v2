@@ -6,7 +6,7 @@
   "faq": "SSS",
   "pepzine": "Pepzine",
   "about": "Hakkımızda",
-  "cta": "HEMEN PEPAPP'I DENE",
+  "cta": "Pepapp'ı Dene",
   "openMenu": "Menüyü aç",
   "closeMenu": "Menüyü kapat"
 },
@@ -14,10 +14,13 @@
     "eyebrow": "Senin ritmine uyum sağlar",
     "headline": "Anlaşılmaya\nihtiyacın var.",
     "subheading": "Yalnızca döngünü takip eden birine değil, seni anlayan ve tanıyan birine ihtiyacın olduğunu biliyorum. Bu yüzden buradayım. Tanışmamız gerek.",
-    "primaryCta": "Denemeye Başla",
+    "primaryCta": "Hemen İndir",
     "secondaryCta": "Nasıl çalıştığını gör",
     "socialProof": "{count}+ kullanıcı tarafından seviliyor",
-    "ratingLabel": "kullanıcı puanı"
+    "ratingLabel": "App Store’da 5 yıldızlı değerlendirme",
+    "ratingCount": "200K+",
+    "happyWomen": "5M+ Mutlu Kadın",
+    "awardText": "2025 Türkiye’nin En İyi Regl Takip Uygulaması"
   },
   "stats": {
     "heading": "Milyonların güvendiği uygulama",

@@ -1,0 +1,207 @@
+{
+  "id": "meet-pep-default",
+  "version": "1.0.0",
+  "name": "Meet Pep Default Flow",
+  "startStepId": "welcome",
+  "locales": [
+    "tr",
+    "en"
+  ],
+  "steps": [
+    {
+      "id": "welcome",
+      "type": "message",
+      "title": {
+        "tr": "Merhaba, ben Pep.",
+        "en": "Hi, I’m Pep."
+      },
+      "description": {
+        "tr": "Seni biraz tanıyıp Pepapp deneyimini daha kişisel hale getirmek istiyorum.",
+        "en": "I’d like to get to know you a little and make your Pepapp experience more personal."
+      },
+      "nextStepId": "goal"
+    },
+    {
+      "id": "goal",
+      "type": "singleChoice",
+      "answerKey": "primaryGoal",
+      "title": {
+        "tr": "Pepapp’ı en çok ne için kullanmak istiyorsun?",
+        "en": "What do you mainly want to use Pepapp for?"
+      },
+      "description": {
+        "tr": "Bana en yakın olanı seç. Sonra önerilerimi buna göre şekillendireceğim.",
+        "en": "Choose the one that feels closest. I’ll shape my suggestions around it."
+      },
+      "required": true,
+      "options": [
+        {
+          "id": "cycle",
+          "label": {
+            "tr": "Döngümü daha iyi anlamak",
+            "en": "Understand my cycle better"
+          },
+          "value": "cycle"
+        },
+        {
+          "id": "mood",
+          "label": {
+            "tr": "Ruh halimi takip etmek",
+            "en": "Track my mood"
+          },
+          "value": "mood"
+        },
+        {
+          "id": "wellbeing",
+          "label": {
+            "tr": "Kendime daha iyi bakmak",
+            "en": "Take better care of myself"
+          },
+          "value": "wellbeing"
+        },
+        {
+          "id": "ai",
+          "label": {
+            "tr": "Pep ile konuşmak",
+            "en": "Talk with Pep"
+          },
+          "value": "ai"
+        }
+      ],
+      "nextStepId": "tone"
+    },
+    {
+      "id": "tone",
+      "type": "singleChoice",
+      "answerKey": "preferredTone",
+      "title": {
+        "tr": "Sana nasıl yaklaşmamı istersin?",
+        "en": "How would you like me to support you?"
+      },
+      "description": {
+        "tr": "Daha sakin mi, daha motive edici mi?",
+        "en": "More calming, or more motivating?"
+      },
+      "required": true,
+      "options": [
+        {
+          "id": "soft",
+          "label": {
+            "tr": "Nazik ve sakin",
+            "en": "Gentle and calm"
+          },
+          "value": "soft"
+        },
+        {
+          "id": "motivating",
+          "label": {
+            "tr": "Motive edici",
+            "en": "Motivating"
+          },
+          "value": "motivating"
+        },
+        {
+          "id": "direct",
+          "label": {
+            "tr": "Net ve pratik",
+            "en": "Clear and practical"
+          },
+          "value": "direct"
+        },
+        {
+          "id": "playful",
+          "label": {
+            "tr": "Eğlenceli ve samimi",
+            "en": "Playful and friendly"
+          },
+          "value": "playful"
+        }
+      ],
+      "nextStepId": "reminders"
+    },
+    {
+      "id": "reminders",
+      "type": "multiChoice",
+      "answerKey": "reminderTopics",
+      "title": {
+        "tr": "Sana hangi konularda hatırlatma yapayım?",
+        "en": "What would you like me to remind you about?"
+      },
+      "description": {
+        "tr": "Birden fazla seçenek seçebilirsin.",
+        "en": "You can choose more than one."
+      },
+      "required": false,
+      "options": [
+        {
+          "id": "period",
+          "label": {
+            "tr": "Regl yaklaşırken",
+            "en": "Before my period"
+          },
+          "value": "period"
+        },
+        {
+          "id": "mood",
+          "label": {
+            "tr": "Ruh halim değiştiğinde",
+            "en": "When my mood changes"
+          },
+          "value": "mood"
+        },
+        {
+          "id": "selfcare",
+          "label": {
+            "tr": "Kendime bakım için",
+            "en": "For self-care"
+          },
+          "value": "selfcare"
+        },
+        {
+          "id": "content",
+          "label": {
+            "tr": "Bana uygun içerikler için",
+            "en": "For content that fits me"
+          },
+          "value": "content"
+        }
+      ],
+      "nextStepId": "name"
+    },
+    {
+      "id": "name",
+      "type": "text",
+      "answerKey": "displayName",
+      "title": {
+        "tr": "Sana nasıl sesleneyim?",
+        "en": "What should I call you?"
+      },
+      "description": {
+        "tr": "İstersen boş bırakabilirsin.",
+        "en": "You can leave this blank if you prefer."
+      },
+      "placeholder": {
+        "tr": "Adın",
+        "en": "Your name"
+      },
+      "required": false,
+      "nextStepId": "complete"
+    },
+    {
+      "id": "complete",
+      "type": "end",
+      "title": {
+        "tr": "Tamamdır, artık seni biraz daha iyi tanıyorum.",
+        "en": "All set. I know you a little better now."
+      },
+      "description": {
+        "tr": "Bundan sonra Pepapp deneyimini sana daha yakın hissettirecek şekilde şekillendireceğim.",
+        "en": "From now on, I’ll shape your Pepapp experience to feel more personal to you."
+      },
+      "storeLinks": {
+        "appStore": "https://apps.apple.com/tr/app/pepapp-adet-takvimi-regl/id1130242486?l",
+        "googlePlay": "https://play.google.com/store/apps/details?id=com.pepapp"
+      }
+    }
+  ]
+}
