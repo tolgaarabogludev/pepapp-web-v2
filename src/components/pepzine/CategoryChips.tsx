@@ -1,28 +1,28 @@
 "use client";
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { CATEGORIES, type PepzineCategory } from "@/lib/pepzine/types";
+
+type CategoryChip = {
+  title: string;
+  slug: string;
+};
 
 interface CategoryChipsProps {
-  active?: PepzineCategory | null;
+  active?: string | null;
+  categories?: CategoryChip[];
 }
 
-export function CategoryChips({ active }: CategoryChipsProps) {
+export function CategoryChips({ active, categories = [] }: CategoryChipsProps) {
   const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const t = useTranslations("pepzinePage.categories");
 
-  function handleSelect(cat: PepzineCategory | null) {
-    const params = new URLSearchParams(searchParams.toString());
-    if (cat) {
-      params.set("kategori", cat);
-    } else {
-      params.delete("kategori");
+  function handleSelect(categorySlug: string | null) {
+    if (!categorySlug) {
+      router.push("/tr/pepzine");
+      return;
     }
-    router.push(`${pathname}?${params.toString()}`);
+
+    router.push(`/tr/pepzine/kategori/${categorySlug}`);
   }
 
   return (
@@ -36,20 +36,21 @@ export function CategoryChips({ active }: CategoryChipsProps) {
             : "border-border text-muted-foreground hover:text-foreground hover:border-foreground"
         )}
       >
-        {t("all")}
+        Tümü
       </button>
-      {CATEGORIES.map((cat) => (
+
+      {categories.map((category) => (
         <button
-          key={cat}
-          onClick={() => handleSelect(cat)}
+          key={category.slug}
+          onClick={() => handleSelect(category.slug)}
           className={cn(
             "px-4 py-1.5 rounded-full text-sm font-medium transition-colors border",
-            active === cat
+            active === category.slug
               ? "bg-foreground text-background border-foreground"
               : "border-border text-muted-foreground hover:text-foreground hover:border-foreground"
           )}
         >
-          {t(cat)}
+          {category.title}
         </button>
       ))}
     </div>
