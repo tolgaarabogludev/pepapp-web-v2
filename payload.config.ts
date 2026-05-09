@@ -1,6 +1,7 @@
 
 
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
+import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
 import sharp from "sharp";
@@ -378,11 +379,17 @@ export default buildConfig({
       ],
     },
   ],
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URI || "file:./payload.db",
-    },
-  }),
+  db: process.env.DATABASE_URL
+    ? postgresAdapter({
+        pool: {
+          connectionString: process.env.DATABASE_URL,
+        },
+      })
+    : sqliteAdapter({
+        client: {
+          url: process.env.DATABASE_URI || "file:./payload.db",
+        },
+      }),
   editor: lexicalEditor({}),
   localization: {
     locales: ["tr", "en", "es"],
