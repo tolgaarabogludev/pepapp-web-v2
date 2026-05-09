@@ -2,9 +2,12 @@
 
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { postgresAdapter } from "@payloadcms/db-postgres";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
 import sharp from "sharp";
+
+const isVercelBlobEnabled = Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 
 export default buildConfig({
   admin: {
@@ -378,6 +381,15 @@ export default buildConfig({
         },
       ],
     },
+  ],
+  plugins: [
+    vercelBlobStorage({
+      enabled: isVercelBlobEnabled,
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+      collections: {
+        media: true,
+      },
+    }),
   ],
   db: process.env.DATABASE_URL
     ? postgresAdapter({
