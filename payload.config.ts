@@ -4,7 +4,9 @@ import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
+
 import sharp from "sharp";
+const databaseUrl = process.env.DATABASE_URL || process.env.POSTGRES_URL;
 
 
 export default buildConfig({
@@ -381,10 +383,10 @@ export default buildConfig({
     },
   ],
   plugins: [],
-  db: process.env.DATABASE_URL
+  db: databaseUrl
     ? postgresAdapter({
         pool: {
-          connectionString: process.env.DATABASE_URL,
+          connectionString: databaseUrl,
         },
       })
     : sqliteAdapter({
