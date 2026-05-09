@@ -34,41 +34,47 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]);
 
-  const categoryRoutes = (
-    await Promise.all(
-      LOCALES.map(async (locale) => {
-        const categories = await getPayloadCategories(locale);
+  try {
+    const categoryRoutes = (
+      await Promise.all(
+        LOCALES.map(async (locale) => {
+          const categories = await getPayloadCategories(locale);
 
-        return categories.map((category) => ({
-          url: `${SITE_URL}/${locale}/pepzine/kategori/${category.slug}`,
-          lastModified: new Date(),
-          changeFrequency: "weekly" as const,
-          priority: 0.7,
-        }));
-      })
-    )
-  ).flat();
+          return categories.map((category) => ({
+            url: `${SITE_URL}/${locale}/pepzine/kategori/${category.slug}`,
+            lastModified: new Date(),
+            changeFrequency: "weekly" as const,
+            priority: 0.7,
+          }));
+        })
+      )
+    ).flat();
 
-  const postRoutes = (
-    await Promise.all(
-      LOCALES.map(async (locale) => {
-        const slugs = await getPayloadPostStaticParams(locale);
+    const postRoutes = (
+      await Promise.all(
+        LOCALES.map(async (locale) => {
+          const slugs = await getPayloadPostStaticParams(locale);
 
-        return Promise.all(
-          slugs.map(async ({ slug }) => {
-            const post = await getPublishedPayloadPostBySlug(slug, locale);
+          return Promise.all(
+            slugs.map(async ({ slug }) => {
+              const post = await getPublishedPayloadPostBySlug(slug, locale);
 
-            return {
-              url: `${SITE_URL}/${locale}/pepzine/${slug}`,
-              lastModified: new Date(post?.updatedAt || post?.publishedAt || Date.now()),
-              changeFrequency: "monthly" as const,
-              priority: 0.8,
-            };
-          })
-        );
-      })
-    )
-  ).flat();
+              return {
+                url: `${SITE_URL}/${locale}/pepzine/${slug}`,
+                lastModified: new Date(post?.updatedAt || post?.publishedAt || Date.now()),
+                changeFrequency: "monthly" as const,
+                priority: 0.8,
+              };
+            })
+          );
+        })
+      )
+    ).flat();
 
-  return [...staticRoutes, ...localeRoutes, ...categoryRoutes, ...postRoutes];
+    return [...staticRoutes, ...localeRoutes, ...categoryRoutes, ...postRoutes];
+  } catch (error) {
+    console.warn("Sitemap generation skipped:", error);
+
+    return [...staticRoutes, ...localeRoutes];
+  }
 }
