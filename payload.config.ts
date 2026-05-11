@@ -1,12 +1,15 @@
 
 
-import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
 
 import sharp from "sharp";
 const databaseUrl = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+
+if (!databaseUrl) {
+  throw new Error("DATABASE_URL or POSTGRES_URL is required.");
+}
 
 
 export default buildConfig({
@@ -383,17 +386,11 @@ export default buildConfig({
     },
   ],
   plugins: [],
-  db: databaseUrl
-    ? postgresAdapter({
-        pool: {
-          connectionString: databaseUrl,
-        },
-      })
-    : sqliteAdapter({
-        client: {
-          url: process.env.DATABASE_URI || "file:./payload.db",
-        },
-      }),
+  db: postgresAdapter({
+    pool: {
+      connectionString: databaseUrl,
+    },
+  }),
   editor: lexicalEditor({}),
   localization: {
     locales: ["tr", "en", "es"],
