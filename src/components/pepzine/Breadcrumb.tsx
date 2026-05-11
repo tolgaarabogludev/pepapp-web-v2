@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { PepzineCategory } from "@/lib/pepzine/types";
 
 interface BreadcrumbItem {
   label: string;
@@ -7,18 +6,31 @@ interface BreadcrumbItem {
 }
 
 interface BreadcrumbProps {
-  category: PepzineCategory;
+  category?: string;
+  categorySlug?: string;
   title: string;
   locale?: string;
 }
 
-export function Breadcrumb({ category, title, locale = "tr" }: BreadcrumbProps) {
+export function Breadcrumb({
+  category,
+  categorySlug,
+  title,
+  locale = "tr",
+}: BreadcrumbProps) {
   const base = locale === "tr" ? "/tr" : "/en";
 
   const items: BreadcrumbItem[] = [
     { label: "Pepapp", href: base },
     { label: "Pepzine", href: `${base}/pepzine` },
-    { label: category, href: `${base}/pepzine?kategori=${category}` },
+    ...(category
+      ? [
+          {
+            label: category,
+            href: categorySlug ? `${base}/pepzine/${categorySlug}` : undefined,
+          },
+        ]
+      : []),
     { label: title },
   ];
 

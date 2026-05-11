@@ -6,29 +6,36 @@ export function ArticleAppCta() {
   const t = useTranslations("articleAppCta");
 
   return (
-    <div className="px-5 max-w-2xl mx-auto py-6">
-      <div className="rounded-2xl bg-gradient-to-br from-accent/10 via-muted/30 to-muted/50 border border-border/40 px-7 py-8">
-        <p className="text-base font-semibold text-foreground mb-2">
-          {t("title")}
+    <section className="px-5 max-w-2xl mx-auto py-16">
+      <div className="rounded-[2rem] border border-border/60 bg-foreground px-7 py-8 md:px-9 md:py-10 text-background">
+        <p className="text-xs font-semibold uppercase tracking-widest text-background/60 mb-3">
+          Pepapp
         </p>
-        <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">
+          {t("title")}
+        </h2>
+
+        <p className="text-sm md:text-base text-background/70 leading-relaxed mb-7 max-w-xl">
           {t("description")}
         </p>
+
         <div className="flex flex-wrap gap-3">
           <Link
             href={`/${locale}#download`}
-            className="inline-flex items-center px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-medium hover:opacity-80 transition-opacity"
+            className="inline-flex items-center px-5 py-2.5 rounded-full bg-background text-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
           >
             {t("download")}
           </Link>
+
           <Link
             href={`/${locale}#peptalk`}
-            className="inline-flex items-center px-5 py-2.5 rounded-full border border-border text-sm font-medium text-foreground hover:border-foreground transition-colors"
+            className="inline-flex items-center px-5 py-2.5 rounded-full border border-white/15 text-sm font-medium text-background hover:border-white/40 transition-colors"
           >
             {t("discover")}
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

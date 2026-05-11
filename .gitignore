@@ -28,3 +28,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .claude/
+payload.db
+migration-output/
+public/payload/media/
+.migration-blob-progress.json

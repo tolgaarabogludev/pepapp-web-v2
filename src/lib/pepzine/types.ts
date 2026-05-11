@@ -4,7 +4,9 @@ export type PepzineCategory =
   | "beslenme"
   | "hareket"
   | "uyku"
-  | "ilişkiler";
+  | "ilişkiler"
+  | "iliskiler"
+  | string;
 
 export const CATEGORIES: PepzineCategory[] = [
   "döngü",
@@ -23,14 +25,17 @@ export interface PepzineFaq {
 export interface PepzineFrontmatter {
   title: string;
   description: string;
+  slug?: string;
   date: string;
-  updatedDate?: string;
+  updatedAt?: string;
   category: PepzineCategory;
+  categorySlug?: string;
   tags: string[];
   author: string;
-  coverImage?: string;
-  featured?: boolean;
   readingTime?: number;
+  image?: string;
+  imageAlt?: string;
+  featured?: boolean;
   faqs?: PepzineFaq[];
 }
 

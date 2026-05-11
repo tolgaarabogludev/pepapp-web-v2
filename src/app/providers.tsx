@@ -7,13 +7,15 @@ type ProvidersProps = {
   children: React.ReactNode;
 };
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export function Providers({ children }: ProvidersProps) {
   useEffect(() => {
     const posthogKey =
       process.env.NEXT_PUBLIC_POSTHOG_KEY ??
       process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN;
 
-    if (!posthogKey || posthog.__loaded) {
+    if (!isProduction || !posthogKey || posthog.__loaded) {
       return;
     }
 

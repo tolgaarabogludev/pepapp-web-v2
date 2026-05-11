@@ -1,17 +1,22 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
-  getPostBySlug,
-  getAllSlugs,
-  getRelatedPosts,
-} from "@/lib/pepzine/posts";
-import { parseHeadings } from "@/lib/pepzine/headings";
+  getPayloadPostStaticParams,
+  getPublishedPayloadPostBySlug,
+} from "@/lib/payload/queries";
+import {
+  getPayloadPostSeo,
+  payloadPostToFrontmatter,
+  payloadRelatedPostsToPepzineMeta,
+} from "@/lib/payload/adapters";
+import type { PayloadLocale } from "@/lib/payload/types";
+import type { Heading } from "@/lib/pepzine/headings";
 import { getAuthor } from "@/lib/pepzine/authors";
 import { Breadcrumb } from "@/components/pepzine/Breadcrumb";
 import { ArticleHeroImage } from "@/components/pepzine/ArticleHeroImage";
 import { ArticleHeader } from "@/components/pepzine/ArticleHeader";
 import { TableOfContents } from "@/components/pepzine/TableOfContents";
-import { ArticleBody } from "@/components/pepzine/ArticleBody";
+import { PayloadArticleBody } from "@/components/pepzine/PayloadArticleBody";
 import { ArticleFaq } from "@/components/pepzine/ArticleFaq";
 import { ArticleAppCta } from "@/components/pepzine/ArticleAppCta";
 import { ArticleAuthor } from "@/components/pepzine/ArticleAuthor";
@@ -20,48 +25,69 @@ import { ReadingProgress } from "@/components/pepzine/ReadingProgress";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
-const SITE_URL = "https://pepapp.com";
+const SITE_URL = "https://letspepapp.com";
 const OG_DEFAULT = "/images/og/pepzine-default.jpg";
+export const revalidate = 3600;
+export const dynamicParams = true;
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
 
+function toPayloadLocale(locale: string): PayloadLocale {
+  if (locale === "en" || locale === "es") return locale;
+  return "tr";
+}
+
+function getAbsoluteImageUrl(image?: string) {
+  if (!image) return `${SITE_URL}${OG_DEFAULT}`;
+  if (image.startsWith("http")) return image;
+  return `${SITE_URL}${image}`;
+}
+
 export async function generateStaticParams() {
-  const locales = ["tr", "en"];
-  return locales.flatMap((locale) =>
-    getAllSlugs(locale).map((slug) => ({ locale, slug }))
-  );
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = getPostBySlug(locale, slug);
+  const payloadLocale = toPayloadLocale(locale);
+  const post = await getPublishedPayloadPostBySlug(slug, payloadLocale);
+
   if (!post) return {};
 
-  const { frontmatter } = post;
-  const ogImage = frontmatter.coverImage ?? OG_DEFAULT;
-  const pageUrl = `${SITE_URL}/${locale}/pepzine/${slug}`;
+  const frontmatter = payloadPostToFrontmatter(post);
+  const seo = getPayloadPostSeo(post);
+  const pageUrl = seo.canonicalUrl || `${SITE_URL}/${locale}/pepzine/${slug}`;
+  const ogImage = getAbsoluteImageUrl(frontmatter.image);
 
   return {
-    title: frontmatter.title,
-    description: frontmatter.description,
+    title: seo.title,
+    description: seo.description,
+    robots: seo.noIndex ? { index: false, follow: false } : undefined,
     alternates: {
       canonical: pageUrl,
     },
     openGraph: {
-      title: frontmatter.title,
-      description: frontmatter.description,
+      title: seo.title,
+      description: seo.description,
       type: "article",
       publishedTime: frontmatter.date,
-      modifiedTime: frontmatter.updatedDate ?? frontmatter.date,
+      modifiedTime: frontmatter.updatedAt ?? frontmatter.date,
       authors: [frontmatter.author],
-      images: [{ url: ogImage, width: 1200, height: 630, alt: frontmatter.title }],
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: frontmatter.imageAlt || frontmatter.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: frontmatter.title,
-      description: frontmatter.description,
+      title: seo.title,
+      description: seo.description,
       images: [ogImage],
     },
   };
@@ -69,17 +95,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function PepzinePostPage({ params }: PageProps) {
   const { locale, slug } = await params;
-  const post = getPostBySlug(locale, slug);
+  const payloadLocale = toPayloadLocale(locale);
+  const post = await getPublishedPayloadPostBySlug(slug, payloadLocale);
+
   if (!post) notFound();
 
-  const { frontmatter, content } = post;
-  const relatedPosts = getRelatedPosts(locale, slug, frontmatter.category);
-  const headings = parseHeadings(content);
+  const frontmatter = payloadPostToFrontmatter(post);
+  const relatedPosts = payloadRelatedPostsToPepzineMeta(post);
+  const headings: Heading[] = [];
   const author = getAuthor(frontmatter.author);
-
   const pageUrl = `${SITE_URL}/${locale}/pepzine/${slug}`;
+  const imageUrl = getAbsoluteImageUrl(frontmatter.image);
 
-  // --- JSON-LD ---
   const orgSchema = {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
@@ -93,13 +120,11 @@ export default async function PepzinePostPage({ params }: PageProps) {
     headline: frontmatter.title,
     description: frontmatter.description,
     datePublished: frontmatter.date,
-    dateModified: frontmatter.updatedDate ?? frontmatter.date,
+    dateModified: frontmatter.updatedAt ?? frontmatter.date,
     author: { "@type": "Organization", name: frontmatter.author },
     publisher: orgSchema,
     mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
-    ...(frontmatter.coverImage && {
-      image: `${SITE_URL}${frontmatter.coverImage}`,
-    }),
+    image: imageUrl,
   };
 
   const breadcrumbSchema = {
@@ -107,14 +132,28 @@ export default async function PepzinePostPage({ params }: PageProps) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Pepapp", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "Pepzine", item: `${SITE_URL}/${locale}/pepzine` },
       {
         "@type": "ListItem",
-        position: 3,
-        name: frontmatter.category,
-        item: `${SITE_URL}/${locale}/pepzine?kategori=${frontmatter.category}`,
+        position: 2,
+        name: "Pepzine",
+        item: `${SITE_URL}/${locale}/pepzine`,
       },
-      { "@type": "ListItem", position: 4, name: frontmatter.title, item: pageUrl },
+      ...(frontmatter.categorySlug
+        ? [
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: frontmatter.category,
+              item: `${SITE_URL}/${locale}/pepzine/${frontmatter.categorySlug}`,
+            },
+          ]
+        : []),
+      {
+        "@type": "ListItem",
+        position: frontmatter.categorySlug ? 4 : 3,
+        name: frontmatter.title,
+        item: pageUrl,
+      },
     ],
   };
 
@@ -153,13 +192,14 @@ export default async function PepzinePostPage({ params }: PageProps) {
       <main>
         <Breadcrumb
           category={frontmatter.category}
+          categorySlug={frontmatter.categorySlug}
           title={frontmatter.title}
           locale={locale}
         />
         <ArticleHeroImage frontmatter={frontmatter} />
         <ArticleHeader frontmatter={frontmatter} />
         <TableOfContents headings={headings} />
-        <ArticleBody content={content} />
+        <PayloadArticleBody content={post.body} />
         <ArticleFaq faqs={frontmatter.faqs ?? []} />
         <ArticleAppCta />
         <ArticleAuthor author={author} />
