@@ -244,6 +244,28 @@ export async function getPayloadPostStaticParams(locale: PayloadLocale = "tr") {
   }));
 }
 
+/** One query per locale for sitemap (avoids N+1 per slug at build time). */
+export async function getPublishedPostsForSitemap(locale: PayloadLocale = "tr") {
+  const payload = await getPayloadClient();
+
+  const result = await payload.find({
+    collection: "posts",
+    locale,
+    fallbackLocale: "tr",
+    depth: 0,
+    limit: 5000,
+    sort: "-publishedAt",
+    where: getPublishedPostsWhere(),
+    select: {
+      slug: true,
+      updatedAt: true,
+      publishedAt: true,
+    },
+  });
+
+  return result.docs as { slug?: string; updatedAt?: string | null; publishedAt?: string | null }[];
+}
+
 export const getPayloadCategories = unstable_cache(
   async (locale: PayloadLocale = "tr") => {
     const payload = await getPayloadClient();

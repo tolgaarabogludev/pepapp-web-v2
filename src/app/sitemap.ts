@@ -1,9 +1,5 @@
 import type { MetadataRoute } from "next";
-import {
-  getPayloadCategories,
-  getPayloadPostStaticParams,
-  getPublishedPayloadPostBySlug,
-} from "@/lib/payload/queries";
+import { getPayloadCategories, getPublishedPostsForSitemap } from "@/lib/payload/queries";
 import type { PayloadLocale } from "@/lib/payload/types";
 
 const SITE_URL = "https://letspepapp.com";
@@ -53,20 +49,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const postRoutes = (
       await Promise.all(
         LOCALES.map(async (locale) => {
-          const slugs = await getPayloadPostStaticParams(locale);
+          const posts = await getPublishedPostsForSitemap(locale);
 
-          return Promise.all(
-            slugs.map(async ({ slug }) => {
-              const post = await getPublishedPayloadPostBySlug(slug, locale);
-
-              return {
-                url: `${SITE_URL}/${locale}/pepzine/${slug}`,
-                lastModified: new Date(post?.updatedAt || post?.publishedAt || Date.now()),
-                changeFrequency: "monthly" as const,
-                priority: 0.8,
-              };
-            })
-          );
+          return posts
+            .filter((post) => Boolean(post.slug))
+            .map((post) => ({
+              url: `${SITE_URL}/${locale}/pepzine/${post.slug}`,
+              lastModified: new Date(post.updatedAt || post.publishedAt || Date.now()),
+              changeFrequency: "monthly" as const,
+              priority: 0.8,
+            }));
         })
       )
     ).flat();
