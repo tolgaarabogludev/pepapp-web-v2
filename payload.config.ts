@@ -2,6 +2,7 @@
 
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { buildConfig } from "payload";
 
 import sharp from "sharp";
@@ -39,7 +40,6 @@ export default buildConfig({
       },
     
       upload: {
-        staticDir: "public/payload/media",
         mimeTypes: ["image/*"],
         imageSizes: [
           {
@@ -385,7 +385,15 @@ export default buildConfig({
       ],
     },
   ],
-  plugins: [],
+  plugins: [
+    vercelBlobStorage({
+      enabled: process.env.BLOB_READ_WRITE_TOKEN !== undefined,
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || "",
+    }),
+  ],
   db: postgresAdapter({
     pool: {
       connectionString: databaseUrl,

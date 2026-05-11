@@ -31,3 +31,4 @@ next-env.d.ts
 payload.db
 migration-output/
 public/payload/media/
+.migration-blob-progress.json
