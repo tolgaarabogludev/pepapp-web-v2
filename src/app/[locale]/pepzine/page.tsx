@@ -13,6 +13,8 @@ import { PostCard } from "@/components/pepzine/PostCard";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
+export const revalidate = 3600;
+
 const SITE_URL = "https://letspepapp.com";
 
 interface PageProps {

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
-import { useLocale, useTranslations } from 'next-intl'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
@@ -22,9 +21,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const beliefKeys = ['body', 'cycle', 'understanding', 'wellbeing'] as const
 const teamPillarKeys = ['small', 'care', 'product'] as const
 
-export default function AboutPage() {
-  const t = useTranslations('aboutPage')
-  const locale = useLocale()
+export default async function AboutPage({ params }: PageProps) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'aboutPage' })
 
   return (
     <>

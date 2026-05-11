@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
-import { useLocale, useTranslations } from 'next-intl'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
@@ -45,9 +44,9 @@ function CheckIcon({ active }: { active: boolean }) {
   )
 }
 
-export default function PremiumPage() {
-  const t = useTranslations('premiumPage')
-  const locale = useLocale()
+export default async function PremiumPage({ params }: PageProps) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'premiumPage' })
 
   return (
     <>

@@ -36,6 +36,22 @@ function prettifyCategory(slug: string) {
     .join(" ");
 }
 
+export async function generateStaticParams() {
+  const locales: PayloadLocale[] = ["tr", "en"];
+  const results: { locale: string; category: string }[] = [];
+
+  for (const locale of locales) {
+    const categories = await getPayloadCategories(locale);
+    for (const cat of categories) {
+      if (cat.slug) results.push({ locale, category: cat.slug });
+    }
+  }
+
+  return results;
+}
+
+export const revalidate = 3600;
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, category } = await params;
   const pageUrl = `${SITE_URL}/${locale}/pepzine/kategori/${category}`;
