@@ -1,7 +1,7 @@
 
 
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/layout/primitives/Container";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -40,6 +40,7 @@ const updates = [
 
 export default async function UpdatesPage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "updates" });
 
   return (

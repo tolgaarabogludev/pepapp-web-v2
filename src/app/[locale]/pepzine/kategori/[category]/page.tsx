@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   getPayloadCategories,
   getPublishedPayloadPostsByCategory,
@@ -74,6 +74,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function PepzineCategoryPage({ params, searchParams }: PageProps) {
   const { locale, category } = await params;
+  setRequestLocale(locale);
   const { page } = await searchParams;
   const t = await getTranslations({ locale, namespace: "pepzinePage" });
   const payloadLocale = toPayloadLocale(locale);
