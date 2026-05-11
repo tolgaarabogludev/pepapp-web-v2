@@ -16,7 +16,6 @@ const SITE_URL = "https://letspepapp.com";
 
 interface PageProps {
   params: Promise<{ locale: string; category: string }>;
-  searchParams: Promise<{ page?: string }>;
 }
 
 function toPayloadLocale(locale: string): PayloadLocale {
@@ -72,16 +71,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function PepzineCategoryPage({ params, searchParams }: PageProps) {
+export default async function PepzineCategoryPage({ params }: PageProps) {
   const { locale, category } = await params;
   setRequestLocale(locale);
-  const { page } = await searchParams;
   const t = await getTranslations({ locale, namespace: "pepzinePage" });
   const payloadLocale = toPayloadLocale(locale);
 
   const categories = await getPayloadCategories(payloadLocale);
 
-  const currentPage = getSafePage(page);
+  const currentPage = 1;
   const payloadPosts = await getPublishedPayloadPostsByCategory(category, payloadLocale, currentPage);
 
   if (!payloadPosts.docs.length) {
