@@ -16,7 +16,7 @@ export const generateMetadata = (props: AdminPageProps) =>
     searchParams: props.searchParams,
   });
 
-export default function Page(props: AdminPageProps) {
+export default async function Page(props: AdminPageProps) {
   return RootPage({
     config,
     importMap,
